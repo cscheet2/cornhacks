@@ -8,16 +8,20 @@
 
 ## Dependencies
 
-### Code Dependencies
+### Libraries
+
 - [p5.js](https://p5js.org)
 
-### Font Dependencies
+### Fonts
+
 - [moonet](https://www.fontspace.com/moonet-font-f119921)
-  - license: Freeware, Non-Commercial
+  - License: Freeware, Non-Commercial
+- [Sarala](https://fonts.google.com/specimen/Sarala)
+  - License: SIL OPEN FONT LICENSE Version 1.1
 
 ## Resources
 
-- 
+- [p5.js documentation](https://p5js.org/reference/)
 
 ## Data
 
@@ -35,7 +39,8 @@ Planet and moon data is stored inside of  `/data/celestial-bodies.json`. Inside 
 | description | body overview                    | N/A        |
 | moons       | bodies orbiting                  | N/A        |
 
-Most of this data was filled in by the DeekSeek AI, which referenced the following sources...
+Most of this data was filled in by the DeepSeek AI, which referenced the following sources...
+
 - [NASA Planetary Fact Sheets](https://nssdc.gsfc.nasa.gov/planetary/factsheet/)
 - [JPL HORIZONS System](https://ssd.jpl.nasa.gov/horizons/)
 - [NASA Solar System Exploration](https://solarsystem.nasa.gov/)
