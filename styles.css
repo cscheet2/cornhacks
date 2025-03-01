@@ -1,67 +1,67 @@
 @font-face {
-    font-family: "Moonet";
-    src: url("./fonts/MoonetdemoRegular-6RnxY.otf") format("opentype");
-    font-weight: normal;
-    font-style: normal;
+  font-family: "Moonet";
+  src: url("./fonts/MoonetdemoRegular-6RnxY.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: "Sarala";
-    src: url("./fonts/Sarala-Regular.ttf") format("truetype");
-    font-weight: normal;
-    font-style: normal;
+  font-family: "Sarala";
+  src: url("./fonts/Sarala-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: "Sarala";
-    src: url("./fonts/Sarala-Bold.ttf") format("truetype");
-    font-weight: bold;
-    font-style: normal;
+  font-family: "Sarala";
+  src: url("./fonts/Sarala-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
 }
 
 * {
-    padding: 0px;
-    margin: 0px;
-    box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
 }
 
 html {
-    --text:#ddd;
-    --bg:#222;
+  --text: #ddd;
+  --bg: #222;
 
-    font-family: Sarala, Arial, Helvetica, sans-serif;
-    font-size: 20pt;
-    line-height: 0.9;
-    color:var(--text);
-    background:var(--bg);
-    hyphens:auto;
+  font-family: Sarala, Arial, Helvetica, sans-serif;
+  font-size: 20pt;
+  line-height: 0.9;
+  color: var(--text);
+  background: var(--bg);
+  hyphens: auto;
 }
 
 body {
-    overflow: auto;
-    display: grid;
+  overflow: auto;
+  display: grid;
 
-    margin: auto;
-    padding:4px;
-    gap:4px;
+  margin: auto;
+  padding: 4px;
+  gap: 4px;
 
-    grid-template:
-        "head head" min-content
-        "navs main" 1fr
-        /256px 1fr;
+  grid-template:
+    "head head" min-content
+    "navs main" 1fr
+    /256px 1fr;
 
-    width: 100vw;
-    max-width: 2048px;
-    height: 100vh;
+  width: 100vw;
+  max-width: 2048px;
+  height: 100vh;
 }
 
 nav {
-    grid-area: head;
-    text-align: center;
+  grid-area: head;
+  text-align: center;
 }
 
 h1 {
-    font-family: Moonet;
+  font-family: Moonet;
 }
 
 #sidebar {
@@ -71,50 +71,44 @@ h1 {
 }
 
 section#navigation {
-    grid-area: navs;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    color: #e0e0e0;
+  grid-area: navs;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: #e0e0e0;
 }
+
 section .subheading {
-    display: flex;
-    /* color: #FFF000; */
-    align-items: center;
-    justify-content: center;
-    /* background-color: #000FFF; */
-    padding: 20px 0px;
+  padding: 20px 0px;
 }
 
 section#navigation .travel-steps {
-    display: flex;
-    gap: 10px;
-    font-size: 16px;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
+  display: flex;
+  gap: 10px;
+  font-size: 16px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 section#navigation .travel-steps input,
-section#navigation .travel-steps button  {
-    width: 80%;
-    padding: 8px;
-    border-radius: 20px;
-    box-sizing: border-box;
-    margin-left: auto;
-    margin-right: auto;
+section#navigation .travel-steps button {
+  width: 80%;
+  padding: 8px;
+  border-radius: 20px;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 section#information {
-    grid-area: info;
+  grid-area: info;
 }
 
-
-
 main {
-    grid-area: main;
+  grid-area: main;
 }
 
 button {
-    font-family: Sarala;
+  font-family: Sarala;
 }

@@ -1,242 +1,242 @@
 {
-    "Sun": {
-        "mass": "1.989 x 10^{30}",
-        "radius": "6.96 x 10^{5}",
-        "distance": "0",
-        "orbit": 0,
-        "color": [
-            "#FFD700",
-            "#FF8C00"
-        ],
-        "description": "G-type main-sequence star containing 99.86% of the Solar System's mass",
+  "Sun": {
+    "mass": "1.989 x 10^{30}",
+    "radius": "6.96 x 10^{5}",
+    "distance": "0",
+    "orbit": 0,
+    "color": [
+      "#FFD700",
+      "#FF8C00"
+    ],
+    "description": "G-type main-sequence star containing 99.86% of the Solar System's mass",
+    "moons": [
+      {
+        "name": "Mercury",
+        "mass": "3.301 x 10^{23}",
+        "radius": "2.4397 x 10^{3}",
+        "distance": "5.79 x 10^{7}",
+        "orbit": "7.600 x 10^{6}",
+        "color": "#A0522D",
+        "description": "Smallest planet with extreme temperature variations",
+        "moons": []
+      },
+      {
+        "name": "Venus",
+        "mass": "4.867 x 10^{24}",
+        "radius": "6.0518 x 10^{3}",
+        "distance": "1.082 x 10^{8}",
+        "orbit": "1.941 x 10^{7}",
+        "color": "#E6D700",
+        "description": "Hottest planet with thick CO₂ atmosphere",
+        "moons": []
+      },
+      {
+        "name": "Earth",
+        "mass": "5.972 x 10^{24}",
+        "radius": "6.371 x 10^{3}",
+        "distance": "1.496 x 10^{8}",
+        "orbit": "3.156 x 10^{7}",
+        "color": "#4169E1",
+        "description": "Only known astronomical object to harbor life",
         "moons": [
-            {
-                "name": "Mercury",
-                "mass": "3.301 x 10^{23}",
-                "radius": "2.4397 x 10^{3}",
-                "distance": "5.79 x 10^{7}",
-                "orbit": "7.600 x 10^{6}",
-                "color": "#A0522D",
-                "description": "Smallest planet with extreme temperature variations",
-                "moons": []
-            },
-            {
-                "name": "Venus",
-                "mass": "4.867 x 10^{24}",
-                "radius": "6.0518 x 10^{3}",
-                "distance": "1.082 x 10^{8}",
-                "orbit": "1.941 x 10^{7}",
-                "color": "#E6D700",
-                "description": "Hottest planet with thick CO₂ atmosphere",
-                "moons": []
-            },
-            {
-                "name": "Earth",
-                "mass": "5.972 x 10^{24}",
-                "radius": "6.371 x 10^{3}",
-                "distance": "1.496 x 10^{8}",
-                "orbit": "3.156 x 10^{7}",
-                "color": "#4169E1",
-                "description": "Only known astronomical object to harbor life",
-                "moons": [
-                    {
-                        "name": "Moon",
-                        "mass": "7.342 x 10^{22}",
-                        "radius": "1.7374 x 10^{3}",
-                        "distance": "3.844 x 10^{5}",
-                        "orbit": "2.360 x 10^{6}",
-                        "color": "#808080",
-                        "description": "Earth's only natural satellite",
-                        "moons": []
-                    }
-                ]
-            },
-            {
-                "name": "Mars",
-                "mass": "6.417 x 10^{23}",
-                "radius": "3.3895 x 10^{3}",
-                "distance": "2.279 x 10^{8}",
-                "orbit": "5.935 x 10^{7}",
-                "color": "#CD5C5C",
-                "description": "Red planet with largest volcano in Solar System",
-                "moons": [
-                    {
-                        "name": "Phobos",
-                        "mass": "1.065 x 10^{16}",
-                        "radius": "1.1267 x 10^{1}",
-                        "distance": "9.376 x 10^{3}",
-                        "orbit": "2.755 x 10^{4}",
-                        "color": "#8B6969",
-                        "description": "Innermost and larger Martian moon",
-                        "moons": []
-                    },
-                    {
-                        "name": "Deimos",
-                        "mass": "1.476 x 10^{15}",
-                        "radius": "6.2 x 10^{0}",
-                        "distance": "2.346 x 10^{4}",
-                        "orbit": "1.091 x 10^{5}",
-                        "color": "#A9A9A9",
-                        "description": "Smaller outer Martian moon",
-                        "moons": []
-                    }
-                ]
-            },
-            {
-                "name": "Jupiter",
-                "mass": "1.898 x 10^{27}",
-                "radius": "6.9911 x 10^{4}",
-                "distance": "7.785 x 10^{8}",
-                "orbit": "3.743 x 10^{8}",
-                "color": "#DAA520",
-                "description": "Largest planet with iconic Great Red Spot",
-                "moons": [
-                    {
-                        "name": "Io",
-                        "mass": "8.932 x 10^{22}",
-                        "radius": "1.8216 x 10^{3}",
-                        "distance": "4.217 x 10^{5}",
-                        "orbit": "1.529 x 10^{5}",
-                        "color": "#FFA500",
-                        "description": "Most volcanically active body in Solar System",
-                        "moons": []
-                    },
-                    {
-                        "name": "Europa",
-                        "mass": "4.800 x 10^{22}",
-                        "radius": "1.561 x 10^{3}",
-                        "distance": "6.709 x 10^{5}",
-                        "orbit": "3.068 x 10^{5}",
-                        "color": "#F0E68C",
-                        "description": "Ice-covered surface with subsurface ocean",
-                        "moons": []
-                    },
-                    {
-                        "name": "Ganymede",
-                        "mass": "1.482 x 10^{23}",
-                        "radius": "2.6341 x 10^{3}",
-                        "distance": "1.070 x 10^{6}",
-                        "orbit": "6.182 x 10^{5}",
-                        "color": "#B0C4DE",
-                        "description": "Largest moon in the Solar System",
-                        "moons": []
-                    },
-                    {
-                        "name": "Callisto",
-                        "mass": "1.076 x 10^{23}",
-                        "radius": "2.4103 x 10^{3}",
-                        "distance": "1.883 x 10^{6}",
-                        "orbit": "1.442 x 10^{6}",
-                        "color": "#778899",
-                        "description": "Heavily cratered and ancient surface",
-                        "moons": []
-                    }
-                ]
-            },
-            {
-                "name": "Saturn",
-                "mass": "5.683 x 10^{26}",
-                "radius": "5.8232 x 10^{4}",
-                "distance": "1.429 x 10^{9}",
-                "orbit": "9.292 x 10^{8}",
-                "color": "#FFDAB9",
-                "description": "Known for its stunning ring system",
-                "moons": [
-                    {
-                        "name": "Titan",
-                        "mass": "1.345 x 10^{23}",
-                        "radius": "2.5747 x 10^{3}",
-                        "distance": "1.222 x 10^{6}",
-                        "orbit": "1.378 x 10^{6}",
-                        "color": "#FFA07A",
-                        "description": "Largest moon of Saturn with a thick atmosphere",
-                        "moons": []
-                    },
-                    {
-                        "name": "Enceladus",
-                        "mass": "1.080 x 10^{20}",
-                        "radius": "2.521 x 10^{2}",
-                        "distance": "2.380 x 10^{5}",
-                        "orbit": "1.184 x 10^{5}",
-                        "color": "#F5F5F5",
-                        "description": "Geologically active with water-ice geysers",
-                        "moons": []
-                    }
-                ]
-            },
-            {
-                "name": "Uranus",
-                "mass": "8.681 x 10^{25}",
-                "radius": "2.5362 x 10^{4}",
-                "distance": "2.871 x 10^{9}",
-                "orbit": "2.651 x 10^{9}",
-                "color": "#AFEEEE",
-                "description": "Ice giant with a tilted rotational axis",
-                "moons": [
-                    {
-                        "name": "Titania",
-                        "mass": "3.400 x 10^{21}",
-                        "radius": "7.887 x 10^{2}",
-                        "distance": "4.363 x 10^{5}",
-                        "orbit": "7.526 x 10^{5}",
-                        "color": "#D3D3D3",
-                        "description": "Largest moon of Uranus",
-                        "moons": []
-                    },
-                    {
-                        "name": "Oberon",
-                        "mass": "2.883 x 10^{21}",
-                        "radius": "7.614 x 10^{2}",
-                        "distance": "5.835 x 10^{5}",
-                        "orbit": "1.214 x 10^{6}",
-                        "color": "#A9A9A9",
-                        "description": "Outermost major moon of Uranus",
-                        "moons": []
-                    }
-                ]
-            },
-            {
-                "name": "Neptune",
-                "mass": "1.024 x 10^{26}",
-                "radius": "2.4622 x 10^{4}",
-                "distance": "4.498 x 10^{9}",
-                "orbit": "5.200 x 10^{9}",
-                "color": "#0000CD",
-                "description": "Windiest planet with supersonic storms",
-                "moons": [
-                    {
-                        "name": "Triton",
-                        "mass": "2.140 x 10^{22}",
-                        "radius": "1.3534 x 10^{3}",
-                        "distance": "3.548 x 10^{5}",
-                        "orbit": "5.077 x 10^{5}",
-                        "color": "#ADD8E6",
-                        "description": "Largest moon of Neptune with retrograde orbit",
-                        "moons": []
-                    }
-                ]
-            },
-            {
-                "name": "Pluto",
-                "mass": "1.303 x 10^{22}",
-                "radius": "1.1883 x 10^{3}",
-                "distance": "5.906 x 10^{9}",
-                "orbit": "7.824 x 10^{9}",
-                "color": "#D2B48C",
-                "description": "Dwarf planet in the Kuiper Belt",
-                "moons": [
-                    {
-                        "name": "Charon",
-                        "mass": "1.586 x 10^{21}",
-                        "radius": "6.06 x 10^{2}",
-                        "distance": "1.960 x 10^{4}",
-                        "orbit": "5.514 x 10^{5}",
-                        "color": "#8B4513",
-                        "description": "Largest moon of Pluto, forming a binary system",
-                        "moons": []
-                    }
-                ]
-            }
+          {
+            "name": "Moon",
+            "mass": "7.342 x 10^{22}",
+            "radius": "1.7374 x 10^{3}",
+            "distance": "3.844 x 10^{5}",
+            "orbit": "2.360 x 10^{6}",
+            "color": "#808080",
+            "description": "Earth's only natural satellite",
+            "moons": []
+          }
         ]
-    }
+      },
+      {
+        "name": "Mars",
+        "mass": "6.417 x 10^{23}",
+        "radius": "3.3895 x 10^{3}",
+        "distance": "2.279 x 10^{8}",
+        "orbit": "5.935 x 10^{7}",
+        "color": "#CD5C5C",
+        "description": "Red planet with largest volcano in Solar System",
+        "moons": [
+          {
+            "name": "Phobos",
+            "mass": "1.065 x 10^{16}",
+            "radius": "1.1267 x 10^{1}",
+            "distance": "9.376 x 10^{3}",
+            "orbit": "2.755 x 10^{4}",
+            "color": "#8B6969",
+            "description": "Innermost and larger Martian moon",
+            "moons": []
+          },
+          {
+            "name": "Deimos",
+            "mass": "1.476 x 10^{15}",
+            "radius": "6.2 x 10^{0}",
+            "distance": "2.346 x 10^{4}",
+            "orbit": "1.091 x 10^{5}",
+            "color": "#A9A9A9",
+            "description": "Smaller outer Martian moon",
+            "moons": []
+          }
+        ]
+      },
+      {
+        "name": "Jupiter",
+        "mass": "1.898 x 10^{27}",
+        "radius": "6.9911 x 10^{4}",
+        "distance": "7.785 x 10^{8}",
+        "orbit": "3.743 x 10^{8}",
+        "color": "#DAA520",
+        "description": "Largest planet with iconic Great Red Spot",
+        "moons": [
+          {
+            "name": "Io",
+            "mass": "8.932 x 10^{22}",
+            "radius": "1.8216 x 10^{3}",
+            "distance": "4.217 x 10^{5}",
+            "orbit": "1.529 x 10^{5}",
+            "color": "#FFA500",
+            "description": "Most volcanically active body in Solar System",
+            "moons": []
+          },
+          {
+            "name": "Europa",
+            "mass": "4.800 x 10^{22}",
+            "radius": "1.561 x 10^{3}",
+            "distance": "6.709 x 10^{5}",
+            "orbit": "3.068 x 10^{5}",
+            "color": "#F0E68C",
+            "description": "Ice-covered surface with subsurface ocean",
+            "moons": []
+          },
+          {
+            "name": "Ganymede",
+            "mass": "1.482 x 10^{23}",
+            "radius": "2.6341 x 10^{3}",
+            "distance": "1.070 x 10^{6}",
+            "orbit": "6.182 x 10^{5}",
+            "color": "#B0C4DE",
+            "description": "Largest moon in the Solar System",
+            "moons": []
+          },
+          {
+            "name": "Callisto",
+            "mass": "1.076 x 10^{23}",
+            "radius": "2.4103 x 10^{3}",
+            "distance": "1.883 x 10^{6}",
+            "orbit": "1.442 x 10^{6}",
+            "color": "#778899",
+            "description": "Heavily cratered and ancient surface",
+            "moons": []
+          }
+        ]
+      },
+      {
+        "name": "Saturn",
+        "mass": "5.683 x 10^{26}",
+        "radius": "5.8232 x 10^{4}",
+        "distance": "1.429 x 10^{9}",
+        "orbit": "9.292 x 10^{8}",
+        "color": "#FFDAB9",
+        "description": "Known for its stunning ring system",
+        "moons": [
+          {
+            "name": "Titan",
+            "mass": "1.345 x 10^{23}",
+            "radius": "2.5747 x 10^{3}",
+            "distance": "1.222 x 10^{6}",
+            "orbit": "1.378 x 10^{6}",
+            "color": "#FFA07A",
+            "description": "Largest moon of Saturn with a thick atmosphere",
+            "moons": []
+          },
+          {
+            "name": "Enceladus",
+            "mass": "1.080 x 10^{20}",
+            "radius": "2.521 x 10^{2}",
+            "distance": "2.380 x 10^{5}",
+            "orbit": "1.184 x 10^{5}",
+            "color": "#F5F5F5",
+            "description": "Geologically active with water-ice geysers",
+            "moons": []
+          }
+        ]
+      },
+      {
+        "name": "Uranus",
+        "mass": "8.681 x 10^{25}",
+        "radius": "2.5362 x 10^{4}",
+        "distance": "2.871 x 10^{9}",
+        "orbit": "2.651 x 10^{9}",
+        "color": "#AFEEEE",
+        "description": "Ice giant with a tilted rotational axis",
+        "moons": [
+          {
+            "name": "Titania",
+            "mass": "3.400 x 10^{21}",
+            "radius": "7.887 x 10^{2}",
+            "distance": "4.363 x 10^{5}",
+            "orbit": "7.526 x 10^{5}",
+            "color": "#D3D3D3",
+            "description": "Largest moon of Uranus",
+            "moons": []
+          },
+          {
+            "name": "Oberon",
+            "mass": "2.883 x 10^{21}",
+            "radius": "7.614 x 10^{2}",
+            "distance": "5.835 x 10^{5}",
+            "orbit": "1.214 x 10^{6}",
+            "color": "#A9A9A9",
+            "description": "Outermost major moon of Uranus",
+            "moons": []
+          }
+        ]
+      },
+      {
+        "name": "Neptune",
+        "mass": "1.024 x 10^{26}",
+        "radius": "2.4622 x 10^{4}",
+        "distance": "4.498 x 10^{9}",
+        "orbit": "5.200 x 10^{9}",
+        "color": "#0000CD",
+        "description": "Windiest planet with supersonic storms",
+        "moons": [
+          {
+            "name": "Triton",
+            "mass": "2.140 x 10^{22}",
+            "radius": "1.3534 x 10^{3}",
+            "distance": "3.548 x 10^{5}",
+            "orbit": "5.077 x 10^{5}",
+            "color": "#ADD8E6",
+            "description": "Largest moon of Neptune with retrograde orbit",
+            "moons": []
+          }
+        ]
+      },
+      {
+        "name": "Pluto",
+        "mass": "1.303 x 10^{22}",
+        "radius": "1.1883 x 10^{3}",
+        "distance": "5.906 x 10^{9}",
+        "orbit": "7.824 x 10^{9}",
+        "color": "#D2B48C",
+        "description": "Dwarf planet in the Kuiper Belt",
+        "moons": [
+          {
+            "name": "Charon",
+            "mass": "1.586 x 10^{21}",
+            "radius": "6.06 x 10^{2}",
+            "distance": "1.960 x 10^{4}",
+            "orbit": "5.514 x 10^{5}",
+            "color": "#8B4513",
+            "description": "Largest moon of Pluto, forming a binary system",
+            "moons": []
+          }
+        ]
+      }
+    ]
+  }
 }
