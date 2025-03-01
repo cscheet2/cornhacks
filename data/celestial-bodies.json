@@ -1,0 +1,92 @@
+{
+  "Sun": {
+    "mass": "1.989 x 10^{30}",
+    "radius": "6.96 x 10^{8}",
+    "distance": "0",
+    "orbit": 0,
+    "color": [],
+    "description": "",
+    "moons": []
+  },
+  "Mercury": {
+    "mass": "",
+    "radius": "",
+    "distance": "",
+    "orbit": 0,
+    "color": "",
+    "description": "",
+    "moons": []
+  },
+  "Venus": {
+    "mass": "",
+    "radius": "",
+    "distance": "",
+    "orbit": 0,
+    "color": "",
+    "description": "",
+    "moons": []
+  },
+  "Earth": {
+    "mass": "",
+    "radius": "",
+    "distance": "",
+    "orbit": 0,
+    "color": "",
+    "description": "",
+    "moons": []
+  },
+  "Mars": {
+    "mass": "",
+    "radius": "",
+    "distance": "",
+    "orbit": 0,
+    "color": "",
+    "description": "",
+    "moons": []
+  },
+  "Jupiter": {
+    "mass": "",
+    "radius": "",
+    "distance": "",
+    "orbit": 0,
+    "color": "",
+    "description": "",
+    "moons": []
+  },
+  "Saturn": {
+    "mass": "",
+    "radius": "",
+    "distance": "",
+    "orbit": 0,
+    "color": "",
+    "description": "",
+    "moons": []
+  },
+  "Uranus": {
+    "mass": "",
+    "radius": "",
+    "distance": "",
+    "orbit": 0,
+    "color": "",
+    "description": "",
+    "moons": []  
+  },
+  "Neptune": {
+    "mass": "",
+    "radius": "",
+    "distance": "",
+    "orbit": 0,
+    "color": "",
+    "description": "",
+    "moons": []
+  },
+  "Pluto": {
+    "mass": "",
+    "radius": "",
+    "distance": "",
+    "orbit": 0,
+    "color": "",
+    "description": "",
+    "moons": []
+  }
+}
