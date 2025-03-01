@@ -1,13 +1,81 @@
 const canvasContainerId = 'canvas-container';
 const canvasContainer = document.getElementById(canvasContainerId);
 
-const FRAME_RATE = 30;
+const FRAME_RATE = 60;
+const TIME_SCALER = 2;
+
+var data = {
+  "root": {
+    "name": "The Sun",
+    "orbitalDistance": 0,
+    "diameter": 5,
+    "rotationalPeriod": 27,
+    "children": [
+      {
+        "name": "Earth",
+        "orbitalDistance": 30,
+        "orbitalPeriod": 30000,
+        "diameter": 2,
+        "rotaionalPeriod": 27,
+        "children": [
+          {
+            "name": "The Moon",
+            "orbitalDistance": 10,
+            "orbitalPeriod": 10000,
+            "diameter": 1,
+            "rotaionalPeriod": 27,
+          }
+        ],
+      },
+      {
+        "name": "Mars",
+        "orbitalDistance": 50,
+        "orbitalPeriod": 60000,
+        "diameter": 3,
+        "rotaionalPeriod": 60,
+        "children": [],
+      },
+    ],
+  },
+}
 
 function getWindowDimensions() {
-    return {
-        width: document.body.clientWidth - 256 - 256 - 16,  // Offset from css
-        height: document.body.clientHeight - 32
-    };
+  return {
+    width: document.body.clientWidth - 256 - 256 - 16,  // Offset from css
+    height: document.body.clientHeight - 32
+  };
+}
+
+var time = Date.now();  // Used to find changeInTime
+var changeInTime = 0;
+
+function incrementPositions(planet) {
+  if (isNaN(planet.angle)) {
+    planet.angle = 0;
+  } else {
+    planet.angle += changeInTime / planet.orbitalPeriod * 2 * Math.PI * TIME_SCALER;
+  }
+
+  if (planet.orbitalDistance == 0) {
+    planet.x = planet.y = planet.z = 0;
+  } else {
+    planet.x = planet.orbitalDistance * Math.cos(planet.angle);
+    planet.y = planet.orbitalDistance * Math.sin(planet.angle);
+    planet.z = 0;  
+  }
+
+  if (planet.children) {
+    planet.children.forEach(child => {
+      incrementPositions(child);
+    });  
+  }
+}
+
+function updatePositions() {
+  changeInTime = Date.now() - time;
+  time = Date.now();
+
+  incrementPositions(data.root);
 }
 
 /* * * * * * * * * * * * * * * *
@@ -18,81 +86,73 @@ function getWindowDimensions() {
  * Called once on start-up
  */
 function setup() {
-    let { width, height } = getWindowDimensions();
-    let canvas = createCanvas(width, height, WEBGL);
-    canvas.parent(canvasContainerId);
+  let { width, height } = getWindowDimensions();
+  let canvas = createCanvas(width, height, WEBGL);
+  canvas.parent(canvasContainerId);
 
-    angleMode(RADIANS);
+  angleMode(RADIANS);
 
-    strokeWeight(5);
-    stroke(255, 255, 255);
-
-    // noFill();
+  strokeWeight(1);
+  stroke(255, 255, 255);
 }
 
 /**
  * Called when window is resized
  */
 function windowResized() {
-    let { width, height } = getWindowDimensions();
-    resizeCanvas(width, height);
+  let { width, height } = getWindowDimensions();
+  resizeCanvas(width, height);
 }
 
 /**
- * Called periodically according to framerate
+ * Called orbitalPeriodically according to framerate
  */
 function draw() {
-    background(0, 0, 0);
-    frameRate(FRAME_RATE);
-    fill(200);
+  updatePositions();
 
-    orbitControl(2, 2, 2);  // Allow use to move camera
+  background(0, 0, 0);
+  frameRate(FRAME_RATE);
+  fill(200);
 
-    // Slowly rotate over time
-    let angle = millis() * 0.001;
-  
-    // The axis of rotation will be the line
-    // going through the center of the canvas
-    // and the mouse
-    let axis = createVector(
-      0,
-      0,
-      100
-    );
-    
-    ambientLight(20);
-  
-    pointLight(
-      255, 0, 0, // color
-      40, -40, 0 // position
-    );
-  
-    directionalLight(
-      0,255,0, // color
-      1, 1, 0  // direction
-    );
-  
-    // Visualize the axis
-    strokeWeight(3);
-    stroke('red');
-    line(0, 0, 0, axis.x, axis.y, axis.z);
-    stroke('blue');
-    line(0, 0, 0, -axis.x, -axis.y, -axis.z);
-  
-    // Rotate a box about that axis
-    lights();
-    noStroke();
-    rotate(angle, axis);
-    box();
-    
-    push();
-    translate(200,100,0);
-    let moonAxis = createVector(
-      0,
-      0,
-      10
-    );
-    rotate(angle, moonAxis);
-    box();
-    pop();
+  orbitControl(2, 2, 2);  // Allow use to move camera  
+
+  ambientLight(20);
+
+  pointLight(
+    255, 0, 0, // color
+    40, -40, 0 // position
+  );
+
+  directionalLight(
+    0, 255, 0, // color
+    1, 1, 0  // direction
+  );
+
+  lights();
+  noStroke();
+
+  drawPlanets(data.root);
+}
+
+function drawOrbit(cBody) {
+  push();
+  fill(100, 100, 100, 100);
+  torus(cBody.orbitalDistance, 0.2, deltaY = 60);
+  pop();
+}
+
+function drawPlanets(planet) {
+  drawOrbit(planet);
+  push();
+  //rotateZ(angle);
+  translate(planet.x, planet.y, planet.z);
+  sphere(planet.diameter);
+
+  if (planet.children) {
+    planet.children.forEach((moon) => {
+      drawPlanets(moon);
+    });
+  }
+
+  pop();
 }
