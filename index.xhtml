@@ -12,6 +12,7 @@
     <link type="text/css" rel="stylesheet" href="./fonts/fonts.css" />
     <script type="text/javascript" defer="" src="./deps/p5.min.js"></script>
     <script type="text/javascript" defer="" src="./core.js"></script>
+    <script type="text/javascript" defer="" src="./sidebar.js"></script>
 </head>
 
 <body>
@@ -19,16 +20,32 @@
         <h1>MoonNav</h1>
     </nav>
 
-    <section id="navigation">
-        <details>
-            <summary><button class="nav" data-target="earth">Earth</button></summary>
-            <button class="nav" data-target="moon">The Moon</button>
-        </details>
-    </section>
-
     <main id="canvas-container"></main>
 
-    <section id="information"></section>
+    <div id="sidebar">
+        <section id="navigation">
+            <details>
+                <summary class="subheading">Travel Steps</summary>
+                <!-- <div class="subheading">Travel Steps</div> -->
+                <!--Change these to be created in js-->
+                <div class="travel-steps">
+                    <input type="text"/>
+                </div>
+                <div class="travel-steps">
+                    <button>+</button>
+                </div>
+                <div class="travel-steps">
+                    <button>Go!</button>
+                </div>
+            </details>
+        </section>
+        <section id="planets">
+            <div class="subheading">Planet Information</div>
+        </section>
+        <section id="settings">
+            <div class="subheading">Graph Settings</div>
+        </section>
+    </div> 
 </body>
 
 </html>

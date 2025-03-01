@@ -46,9 +46,9 @@ body {
     gap:4px;
 
     grid-template:
-        "head head head" min-content
-        "info main navs" 1fr
-        / 256px 1fr 256px;
+        "head head" min-content
+        "navs main" 1fr
+        /256px 1fr;
 
     width: 100vw;
     max-width: 2048px;
@@ -64,13 +64,52 @@ h1 {
     font-family: Moonet;
 }
 
+#sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
 section#navigation {
     grid-area: navs;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: #e0e0e0;
+}
+section .subheading {
+    display: flex;
+    /* color: #FFF000; */
+    align-items: center;
+    justify-content: center;
+    /* background-color: #000FFF; */
+    padding: 20px 0px;
+}
+
+section#navigation .travel-steps {
+    display: flex;
+    gap: 10px;
+    font-size: 16px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+section#navigation .travel-steps input,
+section#navigation .travel-steps button  {
+    width: 80%;
+    padding: 8px;
+    border-radius: 20px;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 section#information {
     grid-area: info;
 }
+
+
 
 main {
     grid-area: main;

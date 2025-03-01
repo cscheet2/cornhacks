@@ -41,7 +41,7 @@ var data = {
 
 function getWindowDimensions() {
   return {
-    width: document.body.clientWidth - 256 - 256 - 16,  // Offset from css
+    width: document.body.clientWidth - 256 - 32 - 8,  // Offset from css
     height: document.body.clientHeight - 32
   };
 }
