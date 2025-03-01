@@ -10,8 +10,8 @@
     "type": "git",
     "url": "git+https://github.com/cscheet2/cornhacks.git"
   },
-  "author": "",
-  "license": "UNLICENSED",
+  "author": "Carston Wiebe, Cale Sigerson, Raegan Scheet",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/cscheet2/cornhacks/issues"
   },
