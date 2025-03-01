@@ -2,13 +2,18 @@
 
 ## Members
 
-- Carston Wiebe
-- Cale Sigerson
-- Raegan Scheet
+- Carston Wiebe: cwiebe3@huskers.unl.edu
+- Cale Sigerson: csigerson2@huskers.unl.edu
+- Raegan Scheet: cscheet2@huskers.unl.edu
 
 ## Dependencies
 
+### Code Dependencies
 - [p5.js](https://p5js.org)
+
+### Font Dependencies
+- [moonet](https://www.fontspace.com/moonet-font-f119921)
+  - license: Freeware, Non-Commercial
 
 ## Resources
 
