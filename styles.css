@@ -4,16 +4,30 @@
     box-sizing: border-box;
 }
 
+html {
+    --text:#ddd;
+    --bg:#222;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14pt;
+    line-height: 1.45;
+    color:var(--text);
+    background:var(--bg);
+    hyphens:auto;
+}
+
 body {
     overflow: auto;
     display: grid;
 
     margin: auto;
+    padding:4px;
+    gap:4px;
 
     grid-template:
-        "head head head" 32px
-        "navs main info" 1fr
-        / 128px 1fr 128px;
+        "head head head" min-content
+        "info main navs" 1fr
+        / 256px 1fr 256px;
 
     width: 100vw;
     max-width: 2048px;
@@ -22,6 +36,7 @@ body {
 
 nav {
     grid-area: head;
+    text-align: center;
 }
 
 section#navigation {

@@ -3,7 +3,7 @@ const canvasContainer = document.getElementById(canvasContainerId);
 
 function getWindowDimensions() {
     return {
-        width: document.body.clientWidth - 128 - 128,
+        width: document.body.clientWidth - 256 - 256 - 16,  // Offset from css
         height: document.body.clientHeight - 32
     };
 }
@@ -23,9 +23,9 @@ function setup() {
     angleMode(RADIANS);
 
     strokeWeight(5);
-    stroke(32, 8, 64);
+    stroke(255, 255, 255);
 
-    noFill();
+    // noFill();
 }
 
 /**
@@ -40,8 +40,9 @@ function windowResized() {
  * Called periodically according to framerate
  */
 function draw() {
-    background(250, 180, 200);
+    background(0, 0, 0);
     frameRate(30);
+    fill(200);
 
     orbitControl(2, 2, 2);  // Allow use to move camera
 
