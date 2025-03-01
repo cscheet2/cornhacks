@@ -1,6 +1,8 @@
 const canvasContainerId = 'canvas-container';
 const canvasContainer = document.getElementById(canvasContainerId);
 
+const FRAME_RATE = 30;
+
 function getWindowDimensions() {
     return {
         width: document.body.clientWidth - 256 - 256 - 16,  // Offset from css
@@ -41,7 +43,7 @@ function windowResized() {
  */
 function draw() {
     background(0, 0, 0);
-    frameRate(30);
+    frameRate(FRAME_RATE);
     fill(200);
 
     orbitControl(2, 2, 2);  // Allow use to move camera
