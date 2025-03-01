@@ -45,24 +45,51 @@ function draw() {
 
     orbitControl(2, 2, 2);  // Allow use to move camera
 
+    // Slowly rotate over time
+    let angle = millis() * 0.001;
+  
+    // The axis of rotation will be the line
+    // going through the center of the canvas
+    // and the mouse
+    let axis = createVector(
+      0,
+      0,
+      100
+    );
+    
+    ambientLight(20);
+  
+    pointLight(
+      255, 0, 0, // color
+      40, -40, 0 // position
+    );
+  
+    directionalLight(
+      0,255,0, // color
+      1, 1, 0  // direction
+    );
+  
+    // Visualize the axis
+    strokeWeight(3);
+    stroke('red');
+    line(0, 0, 0, axis.x, axis.y, axis.z);
+    stroke('blue');
+    line(0, 0, 0, -axis.x, -axis.y, -axis.z);
+  
+    // Rotate a box about that axis
+    lights();
+    noStroke();
+    rotate(angle, axis);
+    box();
+    
     push();
+    translate(200,100,0);
+    let moonAxis = createVector(
+      0,
+      0,
+      10
+    );
+    rotate(angle, moonAxis);
     box();
     pop();
-
-    // // Rotate rings in a half circle to create a sphere of cubes
-    // for (let zAngle = 0; zAngle < 180; zAngle += 30) {
-    //   // Rotate cubes in a full circle to create a ring of cubes
-    //   for (let xAngle = 0; xAngle < 360; xAngle += 30) {
-    //     push();
-
-    //     // Rotate from center of sphere
-    //     rotateZ(zAngle);
-    //     rotateX(xAngle);
-
-    //     // Then translate down 400 units
-    //     translate(0, 400, 0);
-    //     box();
-    //     pop();
-    //   }
-    // }
 }
