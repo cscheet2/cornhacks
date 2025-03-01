@@ -6,12 +6,22 @@
 - Cale Sigerson
 - Raegan Scheet
 
+## Dependencies
 
-### Data
-#### Celestial Bodies JSON
+- [p5.js](https://p5js.org)
+
+## Resources
+
+- 
+
+## Data
+
+### Celestial Bodies JSON
+
 Planet and moon data is stored inside of  `/data/celestial-bodies.json`. Inside of the file, each entry is represented by the following...
+
 | JSON Entry  | Meaning                          | Units      |
-|-------------|----------------------------------| -----------|
+|-------------|----------------------------------|------------|
 | mass        | body's mass                      | kilograms  |
 | radius      | body's radius                    | kilometers |
 | distance    | distance from what it's orbiting | kilometers |
