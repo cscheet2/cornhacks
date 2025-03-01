@@ -2,7 +2,7 @@
   "name": "cornhacks",
   "version": "1.0.0",
   "description": "Our submission for 2025 cornhacks",
-  "main": "index.js",
+  "main": "./wwwroot/core.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/cscheet2/cornhacks#readme",
   "dependencies": {
+    "@types/p5": "^1.7.6",
     "p5": "^1.11.3"
   },
   "devDependencies": {
