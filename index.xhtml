@@ -15,7 +15,7 @@
   <meta property="og:url" content="https://cscheet2.github.io/cornhacks" />
   <meta property="og:image" content="./images/logo/moon.ico" />
 
-  <link type="text/css" rel="stylesheet" href="./style2.css" />
+  <link type="text/css" rel="stylesheet" href="./styles.css" />
 
   <link type="image/x-icon" rel="icon" href="./images/logo/moon.ico" />
   <link rel="apple-touch-icon" href="./images/logo/moon.ico" />
@@ -23,19 +23,25 @@
 
   <script type="text/javascript" defer="" src="./deps/p5.min.js"></script>
   <script type="text/javascript" defer="" src="./core.js"></script>
-  <script type="text/javascript" defer="" src="./sidebar.js"></script>
 </head>
 
 <body>
   <main id="canvas-container"></main>
 
-  <details id="settings">
+  <!-- <details id="settings">
     <summary>Settings</summary>
     <div class="setting-container">
       <p>Rotation Speed</p>
       <input type="range" min="1" max="100" value="50" class="slider" />
     </div>
-  </details>
+  </details> -->
+
+  <div id="information" class="pop-up">
+    <div class="icon">i</div>
+    <p>Left click to rotate</p>
+    <p>Right click to pan</p>
+    <p>Scroll to zoom</p>
+  </div>
 
   <!-- <div id="sidebar">
     <section id="navigation">
