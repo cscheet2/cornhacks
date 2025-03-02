@@ -114,7 +114,6 @@
         "rotationalPeriod": 0.444,
         "radius": 5.8232e4,
         "imgName": "saturn_map.jpg",
-        "ringImgName": "saturn_ring_map.png",
         "children": [
           {
             "name": "Mimas",
