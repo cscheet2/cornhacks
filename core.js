@@ -25,12 +25,6 @@
  */
 
 /**
- * The id of the element that should contain the p5.js canvas.
- * @type {string}
- */
-const canvasContainerId = 'canvas-container';
-
-/**
  * The filepath of the JSON file containing data about celestial bodies.
  * @type {string}
  */
@@ -43,7 +37,19 @@ const dataPath = './data/celestial-bodies.json';
 const textureDirectory = './images/textures/';
 
 /**
- * The framerate that p5.js should try and achieve.
+ * The name of the texture used as the background.
+ * @type {string}
+ */
+const panoramaImgName = 'milky_way.jpg';
+
+/**
+ * The texture used as the background.
+ * @type {p5.Image}
+ */
+var panoramaImg;
+
+/**
+ * The limiting framerate for p5.js.
  * @type {number}
  */
 const FRAME_RATE = 60;
@@ -71,28 +77,37 @@ const TIME_SCALER = 500;
 var root = null;
 
 /**
- * Is 1 if time should progess, 0 otherwise.
+ * Multiplier applied to all rotational velocities.
  * @type {number}
  */
-var shouldProgressTime = 1
+var timeMultiplier = 1
 
 /**
- * The checkbox that freezes time.
+ * The id of the element that should contain the p5.js canvas.
+ * @type {string}
+ */
+const canvasContainerId = 'canvas-container';
+
+/**
+ * The HTML form containing all settings.
  * @type {Element}
  */
-const freezeTimeCheckbox = document.getElementById('freeze-time');
-freezeTimeCheckbox.addEventListener('change', freezeTime);
-freezeTime();  // Grab initial value of freezeTimeCheckbox
+const settingsForm = document.getElementById('settings-form');
+settingsForm.addEventListener('change', (event) => updateTimeMultiplier(event));
 
 /**
- * Toggles the value of shouldProgessTime.
+ * The default radio selection within the settings form.
+ * @type {Element}
  */
-function freezeTime() {
-  if (freezeTimeCheckbox.checked) {
-    shouldProgressTime = 0;
-  } else {
-    shouldProgressTime = 1;
-  }
+const defaultRadio = document.getElementById('time-multiplier-normal');
+defaultRadio.checked = true;
+
+/**
+ * Updates the time multipler.
+ * @param {Event} event The event that triggered the change.
+ */
+function updateTimeMultiplier(event) {
+  timeMultiplier = event.target.value;
 }
 
 /**
@@ -165,6 +180,34 @@ function initDefaultValues(cBody, level = 0) {
 }
 
 /**
+ * Increments the position of the given celestial body and its children based
+ * on the time ellapsed since it was last called.
+ * @param {CelestialBody} cBody The celestial body.
+ * @param {number} deltaTime The change in time.
+ */
+function incrementPositions(cBody, deltaTime) {
+  if (cBody.rotationalPeriod == 0) {
+    cBody.rotationalAngle = 0;  // Avoid divide by zero error
+  } else {
+    cBody.rotationalAngle += deltaTime / cBody.rotationalPeriod * 2 * Math.PI * timeMultiplier;
+  }
+
+  if (cBody.orbitalPeriod == 0) {
+    cBody.orbitalAngle = 0;  // Avoid divide by zero error
+  } else {
+    cBody.orbitalAngle += deltaTime / cBody.orbitalPeriod * 2 * Math.PI * timeMultiplier;
+  }
+
+  cBody.x = cBody.orbitalDistance * Math.cos(cBody.orbitalAngle);
+  cBody.y = cBody.orbitalDistance * Math.sin(cBody.orbitalAngle);
+  cBody.z = 0;
+
+  cBody.children.forEach((child) => {
+    incrementPositions(child, deltaTime);
+  });
+}
+
+/**
  * Gets the current ideal window dimensions.
  * @returns {{ width: number, height: number }} The ideal width and height of
  * the p5 canvas.
@@ -176,45 +219,6 @@ function getWindowDimensions() {
     height: document.body.clientHeight
   };
 }
-
-/**
- * Increments the position of the given celestial body and its children based
- * on the time ellapsed since it was last called.
- * @param {CelestialBody} cBody The celestial body.
- * @param {number} deltaTime The change in time.
- */
-function incrementPositions(cBody, deltaTime) {
-  if (cBody.rotationalPeriod == 0) {
-    cBody.rotationalAngle = 0;  // Avoid divide by zero error
-  } else {
-    cBody.rotationalAngle += deltaTime / cBody.rotationalPeriod * 2 * Math.PI * shouldProgressTime;
-  }
-
-  if (cBody.orbitalPeriod == 0) {
-    cBody.orbitalAngle = 0;  // Avoid divide by zero error
-  } else {
-    cBody.orbitalAngle += deltaTime / cBody.orbitalPeriod * 2 * Math.PI * shouldProgressTime;
-  }
-
-  cBody.x = cBody.orbitalDistance * Math.cos(cBody.orbitalAngle);
-  cBody.y = cBody.orbitalDistance * Math.sin(cBody.orbitalAngle);
-  cBody.z = 0;
-
-  cBody.children.forEach((child) => {
-    incrementPositions(child, deltaTime);
-  });
-}
-/**
- * The name of the texture used as the background.
- * @type {string}
- */
-const panoramaImgName = 'milky_way.jpg';
-
-/**
- * The texture used as the background.
- * @type {p5.Image}
- */
-var panoramaImg;
 
 /**
  * Built-in p5 function.  Called before calling setup, mostly used to load images
@@ -289,17 +293,6 @@ function draw() {
 }
 
 /**
- * Draws the path of the celestial body's orbit.
- * @param {CelestialBody} cBody The celestial body.
- */
-function drawOrbit(cBody) {
-  push();
-  fill(255, 255, 255, 50);
-  torus(cBody.orbitalDistance, STROKE_WIDTH, deltaY = 120);
-  pop();
-}
-
-/**
  * Draws the given celestial body, its orbit, and its children.
  * @param {CelestialBody} cBody The celestial body.
  */
@@ -332,6 +325,17 @@ function drawCBodies(cBody) {
   cBody.children.forEach((moon) => {
     drawCBodies(moon);
   });
+  pop();
+}
+
+/**
+ * Draws the path of the celestial body's orbit.
+ * @param {CelestialBody} cBody The celestial body.
+ */
+function drawOrbit(cBody) {
+  push();
+  fill(255, 255, 255, 50);
+  torus(cBody.orbitalDistance, STROKE_WIDTH, deltaY = 120);
   pop();
 }
 
@@ -376,7 +380,7 @@ function renderPath(x_1, y_1, x_2, y_2, R_1, R_2, angle_1, angle_2, angVelo_2, v
   push();
   //T /= T;
   //t /= t;
-  if(t < T) {
+  if (t < T) {
     t;
   } else {
     t = T;
