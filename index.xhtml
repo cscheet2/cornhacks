@@ -5,11 +5,22 @@
   <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
+  <meta name="application-name" content="Sol Maps" />
   <meta name="author" content="Carston Wiebe, Cale Sigerson, Raegan Scheet" />
-  <meta name="description" content="Project for Cornhacks 2025 at UNL." />
+  <meta name="description" content="Solar Map for Planetary Travel" />
+
+  <meta property="og:title" content="Sol Maps" />
+  <meta property="og:description" content="Solar Map for Planetary Travel" />
+  <meta property="og:url" content="https://cscheet2.github.io/cornhacks"/>
+  <meta property="og:image" content="/images/logo/moon.ico" />
 
   <link type="text/css" rel="stylesheet" href="./styles.css" />
   <link type="text/css" rel="stylesheet" href="./fonts/fonts.css" />
+
+  <link type="image/x-icon" rel="icon" href="/images/logo/moon.ico" />
+  <link rel="apple-touch-icon" href="/images/logo/moon.ico" />
+  <link rel="apple-touch-startup-image" href="/images/logo/moon.ico" />
+
   <script type="text/javascript" defer="" src="./deps/p5.min.js"></script>
   <script type="text/javascript" defer="" src="./core.js"></script>
   <script type="text/javascript" defer="" src="./sidebar.js"></script>
@@ -17,7 +28,7 @@
 
 <body>
   <nav>
-    <h1>MoonNav</h1>
+    <h1>Sol Maps</h1>
   </nav>
 
   <main id="canvas-container"></main>
@@ -27,8 +38,8 @@
       <details>
         <summary class="subheading">Travel</summary>
         <div id="nav-entries">
-          <div id="current-steps"></div>
-          <div class="nav-entry"><button id="add-step">Add Step!</button></div>
+          <div class="nav-entry"><input id="nav-to" type="text" placeholder="To"/></div>
+          <div class="nav-entry"><input id="nav-from" type="text" placeholder="From"/></div>
         </div>
       </details>
     </section>
