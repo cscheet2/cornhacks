@@ -29,7 +29,8 @@
 ### Planet Photos
 
 - The webpage icon came from [Free Icons Png](https://www.freeiconspng.com/img/44668)
-- The planet photos used in this project's graph came from the [Solar System Scope](https://www.solarsystemscope.com/textures/) website
+- Most of the planet photos used in this project's graph came from the [Solar System Scope](https://www.solarsystemscope.com/textures/) website
+- The Pluto texture came from [NASA's Archives](https://nasa3d.arc.nasa.gov/detail/plu0rss1)
 
 ### Celestial Bodies JSON
 

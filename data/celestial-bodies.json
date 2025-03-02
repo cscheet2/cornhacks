@@ -242,6 +242,7 @@
         "orbitalPeriod": 90553,
         "rotationalPeriod": -6.387,
         "radius": 1.1883e3,
+        "imgName": "pluto_map.jpg",
         "children": [
           {
             "name": "Charon",
