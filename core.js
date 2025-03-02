@@ -1,7 +1,7 @@
 const canvasContainerId = 'canvas-container';
 
 const FRAME_RATE = 60;
-const TIME_SCALER = 250;
+const TIME_SCALER = 1000;
 
 var root = null;  // Initialized in setup
 
@@ -27,19 +27,23 @@ function loadData() {
 }
 
 function initDefaultValues(cBody, level = 0) {
+  if (cBody.imgName) {
+    cBody.img = loadImage(`./images/${cBody.imgName}`);
+  }
+
   cBody.rotationalAngle = cBody.orbitalAngle = 0;
 
   switch (level) {
     case 0:  // Star
-      cBody.radius /= 0.5e4;
+      cBody.radius /= 1e4;
       break;
     case 1:  // Planets
       cBody.radius /= 3e2;
-      cBody.orbitalDistance /= 3e5;
+      cBody.orbitalDistance /= 6e5;
       break;
     case 2:  // Moons
-      cBody.radius /= 1.5e2;
-      cBody.orbitalDistance /= 0.5e4;
+      cBody.radius /= 3e2;
+      cBody.orbitalDistance /= 1e4;
       break;
   }
 
@@ -88,13 +92,15 @@ function incrementPositions(cBody, deltaTime) {
  * p5.js built-in functions
  * * * * * * * * * * * * * * * */
 
+function preload() {
+  root = loadData();
+  initDefaultValues(root);
+}
+
 /**
  * Called once on start-up
  */
 function setup() {
-  root = loadData();
-  initDefaultValues(root);
-
   let { width, height } = getWindowDimensions();
   let canvas = createCanvas(width, height, WEBGL);
   canvas.parent(canvasContainerId);
@@ -154,7 +160,10 @@ function drawCBodies(cBody) {
   translate(cBody.x, cBody.y, cBody.z);
   push();
   rotateZ(cBody.rotationalAngle);
-  box(cBody.radius);
+  if (cBody.img) {
+    texture(cBody.img);
+  }
+  sphere(cBody.radius);
   pop();
 
   cBody.children.forEach((moon) => {

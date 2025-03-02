@@ -5,6 +5,7 @@
     "orbitalPeriod": 0,
     "rotationalPeriod": 27,
     "radius": 6.96e5,
+    "imgName": "sun_map.jpg",
     "children": [
       {
         "name": "Mercury",
@@ -12,6 +13,7 @@
         "orbitalPeriod": 88,
         "rotationalPeriod": 58.646,
         "radius": 2.4397e3,
+        "imgName": "mercury_map.jpg",
         "children": []
       },
       {
@@ -20,6 +22,7 @@
         "orbitalPeriod": 224,
         "rotationalPeriod": -243.025,
         "radius": 6.0518e3,
+        "imgName": "venus_atmosphere_map.jpg",
         "children": []
       },
       {
@@ -28,13 +31,15 @@
         "orbitalPeriod": 365.256,
         "rotationalPeriod": 0.997,
         "radius": 6.371e3,
+        "imgName": "earth_map.jpg",
         "children": [
           {
             "name": "The Moon",
             "orbitalDistance": 3.844e5,
             "orbitalPeriod": 27.322,
             "rotationalPeriod": 27.322,
-            "radius": 1.7374e3
+            "radius": 1.7374e3,
+            "imgName": "moon_map.jpg"
           }
         ]
       },
@@ -44,6 +49,7 @@
         "orbitalPeriod": 686.971,
         "rotationalPeriod": 1.026,
         "radius": 3.3895e3,
+        "imgName": "mars_map.jpg",
         "children": [
           {
             "name": "Phobos",
@@ -67,6 +73,7 @@
         "orbitalPeriod": 4332.82,
         "rotationalPeriod": 0.414,
         "radius": 6.9911e4,
+        "imgName": "jupiter_map.jpg",
         "children": [
           {
             "name": "Io",
@@ -104,6 +111,7 @@
         "orbitalPeriod": 10759.22,
         "rotationalPeriod": 0.444,
         "radius": 5.8232e4,
+        "imgName": "saturn_map.jpg",
         "children": [
           {
             "name": "Mimas",
@@ -162,6 +170,7 @@
         "orbitalPeriod": 30687.15,
         "rotationalPeriod": -0.718,
         "radius": 2.5362e4,
+        "imgName": "uranus_map.jpg",
         "children": [
           {
             "name": "Miranda",
@@ -206,6 +215,7 @@
         "orbitalPeriod": 60190.03,
         "rotationalPeriod": 0.671,
         "radius": 2.4622e4,
+        "imgName": "neptune_map.jpg",
         "children": [
           {
             "name": "Triton",
