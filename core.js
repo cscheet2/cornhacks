@@ -14,7 +14,7 @@ const dataPath = './data/celestial-bodies.json';
  * The directory containg all textures.
  * @type {string}
  */
-const textureDirectory = './images/celestial-bodies/';
+const textureDirectory = './images/textures/';
 
 /**
  * The framerate that p5.js should try and achieve.
