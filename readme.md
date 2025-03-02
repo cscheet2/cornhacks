@@ -25,8 +25,10 @@
 
 ## Data
 
-### Celestial Bodies JSON
+### Planet Photos
+The planet photos used in this project came from the [Solar System Scope](https://www.solarsystemscope.com/textures/) website
 
+### Celestial Bodies JSON
 Planet and moon data is stored inside of  `/data/celestial-bodies.json`. Inside of the file, each entry is represented by the following...
 
 | JSON Entry  | Meaning                          | Units      |
