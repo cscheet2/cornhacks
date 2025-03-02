@@ -2,47 +2,66 @@ const canvasContainerId = 'canvas-container';
 const canvasContainer = document.getElementById(canvasContainerId);
 
 const FRAME_RATE = 60;
-const TIME_SCALER = 0.3;
+const TIME_SCALER = 500;
 
 var root = {
   "name": "The Sun",
   "orbitalDistance": 0,
   "orbitalPeriod": 0,
-  "rotationalPeriod": 2700,
-  "diameter": 5,
+  "rotationalPeriod": 27,
+  "radius": 6.96e5,
   "children": [
     {
       "name": "Earth",
-      "orbitalDistance": 30,
-      "orbitalPeriod": 30000,
-      "rotationalPeriod": 2700,
-      "diameter": 2,
+      "orbitalDistance": 1.496e8,
+      "orbitalPeriod": 365,
+      "rotationalPeriod": 1,
+      "radius": 6.371e3,
       "children": [
         {
           "name": "The Moon",
-          "orbitalDistance": 10,
-          "orbitalPeriod": 10000,
-          "rotationalPeriod": 2700,
-          "diameter": 1,
+          "orbitalDistance": 3.844e5,
+          "orbitalPeriod": 27,
+          "rotationalPeriod": 27,
+          "radius": 1.7374e3,
         }
       ],
     },
     {
       "name": "Mars",
-      "orbitalDistance": 50,
-      "orbitalPeriod": 60000,
-      "rotationalPeriod": 2700,
-      "diameter": 3,
+      "orbitalDistance": 2.279e8,
+      "orbitalPeriod": 180,
+      "rotationalPeriod": 3,
+      "radius": 3.3895e3,
     },
   ],
 }
 
-function initData(planet) {
+function scientificNotation(num, mantissa = 0) {
+  if (num == 0) {
+    return { num: 0, mantissa: 0 };
+  } else if (num < 1) {
+    return scientificNotation(num * 10, mantissa - 1);
+  } else if (num >= 10) {
+    return scientificNotation(num / 10, mantissa + 1);
+  } else {
+    return { num: num, mantissa: mantissa };
+  }
+}
+
+function initData(planet, level=0) {
   planet.rotationalAngle = planet.orbitalAngle = 0;
+
+  planet.radius = scaleDisplayDistance(planet.radius) / 5;
+  planet.orbitalDistance = scaleDisplayDistance(planet.orbitalDistance);
+  console.log(planet.name, planet.radius, planet.orbitalDistance)
+
+  planet.orbitalPeriod *= TIME_SCALER;
+  planet.rotationalPeriod *= TIME_SCALER;
 
   if (planet.children) {
     planet.children.forEach((child) => {
-      initData(child);
+      initData(child, level + 1);
     })
   } else {
     planet.children = [];
@@ -60,13 +79,13 @@ function incrementPositions(planet, deltaTime) {
   if (planet.rotationalPeriod == 0) {
     planet.rotationalAngle = 0;  // Avoid divide by zero error
   } else {
-    planet.rotationalAngle += deltaTime / planet.rotationalPeriod * 2 * Math.PI * TIME_SCALER;
+    planet.rotationalAngle += deltaTime / planet.rotationalPeriod * 2 * Math.PI;
   }
 
   if (planet.orbitalPeriod == 0) {
     planet.orbitalAngle = 0;  // Avoid divide by zero error
   } else {
-    planet.orbitalAngle += deltaTime / planet.orbitalPeriod * 2 * Math.PI * TIME_SCALER;
+    planet.orbitalAngle += deltaTime / planet.orbitalPeriod * 2 * Math.PI;
   }
 
   planet.x = planet.orbitalDistance * Math.cos(planet.orbitalAngle);
@@ -76,6 +95,12 @@ function incrementPositions(planet, deltaTime) {
   planet.children.forEach((child) => {
     incrementPositions(child, deltaTime);
   });
+}
+
+function scaleDisplayDistance(distance) {
+  let { num, mantissa } = scientificNotation(distance);
+  console.log(num);
+  return (distance == 0) ? 0 : (Math.log(distance) / Math.log(1.1));
 }
 
 /* * * * * * * * * * * * * * * *
@@ -123,16 +148,10 @@ function draw() {
 
   orbitControl(2, 2, 2);  // Allow use to move camera  
 
-  ambientLight(20);
 
   pointLight(
     255, 0, 0, // color
-    40, -40, 0 // position
-  );
-
-  directionalLight(
-    0, 255, 0, // color
-    1, 1, 0  // direction
+    0, 0, 0 // position
   );
 
   lights();
@@ -151,9 +170,21 @@ function drawOrbit(cBody) {
 function drawPlanets(planet) {
   drawOrbit(planet);
   push();
-  rotateZ(planet.rotationalAngle);
+  // console.log(
+  //   [
+  //     planet.name,
+  //     planet.x,
+  //     planet.y,
+  //     planet.z,
+  //     planet.orbitalDistance,
+  //     planet.radius,
+  //   ].map(((s) => (isNaN(s)) ? s : scaleDistance(s)))
+  // );
   translate(planet.x, planet.y, planet.z);
-  box(planet.diameter);
+  push();
+  rotateZ(planet.rotationalAngle);
+  box(planet.radius);
+  pop();
 
   planet.children.forEach((moon) => {
     drawPlanets(moon);
