@@ -60,8 +60,6 @@ const FRAME_RATE = 60;
  */
 const STROKE_WIDTH = 0.6;
 
-let T;
-
 /**
  * The constant that all time periods are multiplied by.  A larger scaler means
  * a larger period and slower rotation.
@@ -227,7 +225,6 @@ function preload() {
   root = loadData();
   panoramaImg = loadImage(textureDirectory + panoramaImgName);
   initDefaultValues(root);
-  //T = bisectionSolve(0,0,0,0,root.children[2].orbitalDistance,root.children[1].orbitalDistance,0,Math.PI/2,Math.PI * 2 / root.children[2].orbitalPeriod,100,-100,150,.00001,2000);
 }
 
 /**
@@ -284,11 +281,6 @@ function draw() {
 
   // Render all bodies
   drawCBodies(root);
-  /*push();
-  stroke('red');
-  line(root.children[2].x, root.children[2].y, 0, root.children[1].x, root.children[1].y, 0);
-  pop();
-  renderPath(0,0,0,0,root.children[2].orbitalDistance,root.children[1].orbitalDistance,0,Math.PI/2,Math.PI * 2 / root.children[2].orbitalPeriod,100,-100,150,.00001,2000, millis() * .001, T);*/
 }
 
 /**
@@ -335,64 +327,5 @@ function drawOrbit(cBody) {
   push();
   fill(255, 255, 255, 50);
   torus(cBody.orbitalDistance, STROKE_WIDTH, deltaY = 120);
-  pop();
-}
-
-function computeTrajectoryTime(x_1, y_1, x_2, y_2, R_1, R_2, angle_1, angle_2, angVelo_2, v, T) {
-  let transFunction = v * T - Math.sqrt(Math.pow(x_2 + R_2 * Math.cos(angle_2 + angVelo_2 * T) - x_1 - R_1 * Math.cos(angle_1), 2)
-    + Math.pow(y_2 + R_2 * Math.cos(angle_2 + angVelo_2 * T) - y_1 - R_1 * Math.cos(angle_1), 2));
-  return transFunction;
-}
-
-function bisectionSolve(x_1, y_1, x_2, y_2, R_1, R_2, angle_1, angle_2, angVelo_2, v, a, b, tolerance, maxIterations) {
-  let f_a = computeTrajectoryTime(x_1, y_1, x_2, y_2, R_1, R_2, angle_1, angle_2, angVelo_2, v, a);
-  let f_b = computeTrajectoryTime(x_1, y_1, x_2, y_2, R_1, R_2, angle_1, angle_2, angVelo_2, v, b);
-  console.log(f_a);
-  console.log(f_b);
-  console.log(a);
-  console.log(b);
-  if ((a > b) || (!((f_a < 0) && (f_b > 0)) != ((f_a > 0) && (f_b < 0)))) {
-    return -2;
-  }
-  let iteration = 1;
-  while (iteration <= maxIterations) {
-    let c = (a + b) / 2;
-    let f_c = computeTrajectoryTime(x_1, y_1, x_2, y_2, R_1, R_2, angle_1, angle_2, angVelo_2, v, c);
-    console.log(f_c);
-    console.log("c: " + c);
-    if (f_c == 0 || ((b - a) / 2) < tolerance) {
-      return c;
-    }
-    iteration++;
-    if (Math.sign(f_c) == Math.sign(f_a)) {
-      a = c;
-      f_a = f_c
-    } else {
-      b = c;
-      f_b = f_c
-    }
-  }
-  return -1;
-}
-
-function renderPath(x_1, y_1, x_2, y_2, R_1, R_2, angle_1, angle_2, angVelo_2, v, a, b, tolerance, maxIterations, t, T) {
-  push();
-  //T /= T;
-  //t /= t;
-  if (t < T) {
-    t;
-  } else {
-    t = T;
-  }
-  console.log("t: " + t);
-  console.log("T: " + T);
-  let x;
-  let y;
-  x = (x_1 + R_1 * Math.cos(angle_1)) + t / T * ((x_2 + R_2 * Math.cos(angle_2 + angVelo_2 * T)) - (x_1 + R_1 * Math.cos(angle_1)));
-  y = (y_1 + R_1 * Math.sin(angle_1)) + t / T * ((y_2 + R_2 * Math.sin(angle_2 + angVelo_2 * T)) - (y_1 + R_1 * Math.sin(angle_1)));
-  //console.log("x: " + x);
-  //console.log("y: " + y);
-  translate(x, y, 0);
-  sphere(5);
   pop();
 }
