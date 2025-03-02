@@ -1,81 +1,163 @@
 @font-face {
-    font-family: "Moonet";
-    src: url("./fonts/MoonetdemoRegular-6RnxY.otf") format("opentype");
-    font-weight: normal;
-    font-style: normal;
+  font-family: "Moonet";
+  src: url("./fonts/MoonetdemoRegular-6RnxY.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: "Sarala";
-    src: url("./fonts/Sarala-Regular.ttf") format("truetype");
-    font-weight: normal;
-    font-style: normal;
+  font-family: "Sarala";
+  src: url("./fonts/Sarala-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: "Sarala";
-    src: url("./fonts/Sarala-Bold.ttf") format("truetype");
-    font-weight: bold;
-    font-style: normal;
+  font-family: "Sarala";
+  src: url("./fonts/Sarala-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
 }
 
 * {
-    padding: 0px;
-    margin: 0px;
-    box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
 }
 
 html {
-    --text:#ddd;
-    --bg:#222;
+  --text: #ddd;
+  --bg: #222;
 
-    font-family: Sarala, Arial, Helvetica, sans-serif;
-    font-size: 20pt;
-    line-height: 0.9;
-    color:var(--text);
-    background:var(--bg);
-    hyphens:auto;
+  font-family: Sarala, Arial, Helvetica, sans-serif;
+  font-size: 20pt;
+  line-height: 0.9;
+  color: var(--text);
+  background: var(--bg);
+  hyphens: auto;
 }
 
 body {
-    overflow: auto;
-    display: grid;
+  overflow: auto;
+  display: grid;
 
-    margin: auto;
-    padding:4px;
-    gap:4px;
+  margin: auto;
+  padding: 4px;
+  gap: 4px;
 
-    grid-template:
-        "head head head" min-content
-        "info main navs" 1fr
-        / 256px 1fr 256px;
+  grid-template:
+    "head main" min-content
+    "navs main" 1fr
+    / 256px 1fr;
 
-    width: 100vw;
-    max-width: 2048px;
-    height: 100vh;
+
+  width: 100vw;
+  max-width: 2048px;
+  height: 100vh;
 }
 
 nav {
-    grid-area: head;
-    text-align: center;
+  grid-area: head;
+  text-align: center;
+  width: 100%;
 }
 
 h1 {
-    font-family: Moonet;
+  font-family: Moonet;
+}
+
+#sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 
 section#navigation {
-    grid-area: navs;
+  grid-area: navs;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: #e0e0e0;
 }
 
-section#information {
-    grid-area: info;
+section .subheading {
+  padding: 20px 0px;
+}
+
+section#navigation #nav-entries {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  gap: 4px
+}
+
+section#navigation .nav-entry {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  font-size: 16px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  padding: 4px 10px;
+  width: 100%;
+  border: 1px solid black; 
+}
+
+section#navigation .nav-entry button {
+  width: 100%;
+  height: 100%;
+  padding: 0; 
+  border: none; 
+  background: transparent; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+section#navigation .nav-entry input {
+  background: transparent; 
+  border: none; 
+  outline: none; 
+  color: #000000;   
+}
+
+section#navigation #current-steps button {
+  background: transparent; 
+  border: 1px solid black; 
+  height: 32px;
+  width: 32px;
+  border-radius: 100%;
+  outline: none; 
+  color: #ffffff;
+  background-color: #f94449;  
+  justify-content: center;
+  align-items: center; 
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 100ms ease-in;
+}
+
+section#navigation #current-steps:hover button {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+
+section#navigation .setting-container p {
+  font-size: 12px;
+}
+
+section#navigation .setting-container .slider {
+
 }
 
 main {
-    grid-area: main;
+  grid-area: main;
 }
 
 button {
-    font-family: Sarala;
+  font-family: Sarala;
 }
