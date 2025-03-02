@@ -30,14 +30,42 @@
 
   <div id="settings" class="pop-up">
     <img class="pop-up-icon" src="./images/settings.png" alt="Settings icon" />
+
     <form id="settings-form">
-      <label for="freeze-time">Freeze time</label>
-      <input type="checkbox" id="freeze-time" />
+      <fieldset>
+        <legend>Time Multiplier</legend>
+
+        <div>
+          <input type="radio" name="time-multiplier" id="time-multiplier-freeze" value="0" />
+          <label for="time-multiplier-freeze">x0</label>
+        </div>
+        <div>
+          <input type="radio" name="time-multiplier" id="time-multiplier-half" value="0.5" />
+          <label for="time-multiplier-half">x0.5</label>
+        </div>
+        <div>
+          <input type="radio" name="time-multiplier" id="time-multiplier-normal" value="1" />
+          <label for="time-multiplier-normal">x1</label>
+        </div>
+        <div>
+          <input type="radio" name="time-multiplier" id="time-multiplier-double" value="2" />
+          <label for="time-multiplier-double">x2</label>
+        </div>
+        <div>
+          <input type="radio" name="time-multiplier" id="time-multiplier-fast" value="10" />
+          <label for="time-multiplier-fast">x10</label>
+        </div>
+        <div>
+          <input type="radio" name="time-multiplier" id="time-multiplier-very-fast" value="100" />
+          <label for="time-multiplier-very-fast">x100</label>
+        </div>
+      </fieldset>
     </form>
   </div>
 
   <div id="information" class="pop-up">
     <img class="pop-up-icon" src="./images/info.png" alt="Info icon" />
+
     <p>Left click to rotate</p>
     <p>Right click to pan</p>
     <p>Scroll to zoom</p>
