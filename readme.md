@@ -1,5 +1,7 @@
 # Cornhacks 2025
 
+A 3d, fully navigable map of the solar system, hosted [here](https://cscheet2.github.io/cornhacks).
+
 ## Members
 
 - Carston Wiebe: cwiebe3@huskers.unl.edu
@@ -8,9 +10,13 @@
 
 ## Dependencies
 
-### Libraries
-
 - [p5.js](https://p5js.org)
+
+## Resources
+
+- [p5.js Documentation](https://p5js.org/reference/)
+- [Bisection Method Wikipedia Page](https://en.wikipedia.org/wiki/Bisection_method)
+- [Desmos (our own sketch)](https://www.desmos.com/calculator/iisttukdgu)
 
 ### Fonts
 
@@ -19,11 +25,9 @@
 - [Sarala](https://fonts.google.com/specimen/Sarala)
   - License: SIL OPEN FONT LICENSE Version 1.1
 
-## Resources
+### Icons
 
-- [p5.js documentation](https://p5js.org/reference/)
-- [Bisection Method Wikipedia Page](https://en.wikipedia.org/wiki/Bisection_method)
-- [Desmos (our own sketch)](https://www.desmos.com/calculator/iisttukdgu)
+  - [Info and settings icons](https://www.freepik.com/)
 
 ## Data
 

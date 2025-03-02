@@ -31,133 +31,51 @@ html {
 
   font-family: Sarala, Arial, Helvetica, sans-serif;
   font-size: 20pt;
-  line-height: 0.9;
+  line-height: 1.3;
   color: var(--text);
   background: var(--bg);
   hyphens: auto;
 }
 
 body {
-  overflow: auto;
-  display: grid;
-
-  margin: auto;
-  padding: 4px;
-  gap: 4px;
-
-  grid-template:
-    "head main" min-content
-    "navs main" 1fr
-    / 256px 1fr;
-
-
+  overflow: hidden;
   width: 100vw;
-  max-width: 2048px;
   height: 100vh;
 }
 
-nav {
-  grid-area: head;
-  text-align: center;
-  width: 100%;
+div.pop-up {
+  position: absolute;
+  top: 8px;
+  z-index: 9999;
 }
 
-h1 {
-  font-family: Moonet;
+div.pop-up *:not(img.pop-up-icon) {
+  display: none;
 }
 
-#sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
+div.pop-up:hover *:not(img.pop-up-icon) {
+  display: block;
 }
 
-section#navigation {
-  grid-area: navs;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  color: #e0e0e0;
+div.pop-up#information {
+  right: 8px;
+  text-align: right;
 }
 
-section .subheading {
-  padding: 20px 0px;
+div.pop-up#settings {
+  left: 8px;
+  text-align: left;
 }
 
-section#navigation #nav-entries {
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-  gap: 4px
-}
-
-section#navigation .nav-entry {
-  background-color: #ffffff;
-  display: flex;
-  flex-direction: row;
-  font-size: 16px;
-  justify-content: center;
-  align-items: center;
+img.pop-up-icon {
+  background-color: var(--text);
   border-radius: 8px;
-  padding: 4px 10px;
-  width: 100%;
-  border: 1px solid black; 
+  width: 1.2rem;
+  height: 1.2rem;
+  padding:4px;
+  text-align: center;
 }
 
-section#navigation .nav-entry button {
-  width: 100%;
-  height: 100%;
-  padding: 0; 
-  border: none; 
-  background: transparent; 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
-section#navigation .nav-entry input {
-  background: transparent; 
-  border: none; 
-  outline: none; 
-  color: #000000;   
-}
-
-section#navigation #current-steps button {
-  background: transparent; 
-  border: 1px solid black; 
-  height: 32px;
-  width: 32px;
-  border-radius: 100%;
-  outline: none; 
-  color: #ffffff;
-  background-color: #f94449;  
-  justify-content: center;
-  align-items: center; 
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 100ms ease-in;
-}
-
-section#navigation #current-steps:hover button {
-  visibility: visible;
-  opacity: 1;
-}
-
-
-
-section#navigation .setting-container p {
-  font-size: 12px;
-}
-
-section#navigation .setting-container .slider {
-
-}
-
-main {
-  grid-area: main;
-}
-
-button {
-  font-family: Sarala;
+label {
+  font-size: 0.8rem;
 }

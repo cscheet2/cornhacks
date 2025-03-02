@@ -1,41 +1,4 @@
 /**
- * The id of the element that should contain the p5.js canvas.
- * @type {string}
- */
-const canvasContainerId = 'canvas-container';
-
-/**
- * The filepath of the JSON file containing data about celestial bodies.
- * @type {string}
- */
-const dataPath = './data/celestial-bodies.json';
-
-/**
- * The directory containg all textures.
- * @type {string}
- */
-const textureDirectory = './images/celestial-bodies/';
-
-/**
- * The framerate that p5.js should try and achieve.
- * @type {number}
- */
-const FRAME_RATE = 60;
-
-/**
- * The width of strokes drawn by p5.js.
- * @type {number}
- */
-const STROKE_WIDTH = 0.6;
-
-/**
- * The constant that all time periods are multiplied by.  A larger scaler means
- * a larger period and slower rotation.
- * @type {number}
- */
-const TIME_SCALER = 500;
-
-/**
  * Represents a celestial object.
  * @typedef {Object} CelestialBody
  * @property {string} name The name of the body.
@@ -62,11 +25,75 @@ const TIME_SCALER = 500;
  */
 
 /**
+ * The id of the element that should contain the p5.js canvas.
+ * @type {string}
+ */
+const canvasContainerId = 'canvas-container';
+
+/**
+ * The filepath of the JSON file containing data about celestial bodies.
+ * @type {string}
+ */
+const dataPath = './data/celestial-bodies.json';
+
+/**
+ * The directory containg all textures.
+ * @type {string}
+ */
+const textureDirectory = './images/textures/';
+
+/**
+ * The framerate that p5.js should try and achieve.
+ * @type {number}
+ */
+const FRAME_RATE = 60;
+
+/**
+ * The width of strokes drawn by p5.js.
+ * @type {number}
+ */
+const STROKE_WIDTH = 0.6;
+
+let T;
+
+/**
+ * The constant that all time periods are multiplied by.  A larger scaler means
+ * a larger period and slower rotation.
+ * @type {number}
+ */
+const TIME_SCALER = 500;
+
+/**
  * The root celestial body of the solar system, i.e. the Sun.  Initialized in
  * the p5's preload method.
  * @type {CelestialBody}
  */
 var root = null;
+
+/**
+ * Is 1 if time should progess, 0 otherwise.
+ * @type {number}
+ */
+var shouldProgressTime = 1
+
+/**
+ * The checkbox that freezes time.
+ * @type {Element}
+ */
+const freezeTimeCheckbox = document.getElementById('freeze-time');
+freezeTimeCheckbox.addEventListener('change', freezeTime);
+freezeTime();  // Grab initial value of freezeTimeCheckbox
+
+/**
+ * Toggles the value of shouldProgessTime.
+ */
+function freezeTime() {
+  if (freezeTimeCheckbox.checked) {
+    shouldProgressTime = 0;
+  } else {
+    shouldProgressTime = 1;
+  }
+}
 
 /**
  * Loads the JSON file containing all celestial data.
@@ -145,8 +172,8 @@ function initDefaultValues(cBody, level = 0) {
 function getWindowDimensions() {
   // Numbers are taken from CSS paddings/widths/gaps
   return {
-    width: document.body.clientWidth - 256 - 32 - 8,
-    height: document.body.clientHeight - 32
+    width: document.body.clientWidth,
+    height: document.body.clientHeight
   };
 }
 
@@ -160,13 +187,13 @@ function incrementPositions(cBody, deltaTime) {
   if (cBody.rotationalPeriod == 0) {
     cBody.rotationalAngle = 0;  // Avoid divide by zero error
   } else {
-    cBody.rotationalAngle += deltaTime / cBody.rotationalPeriod * 2 * Math.PI;
+    cBody.rotationalAngle += deltaTime / cBody.rotationalPeriod * 2 * Math.PI * shouldProgressTime;
   }
 
   if (cBody.orbitalPeriod == 0) {
     cBody.orbitalAngle = 0;  // Avoid divide by zero error
   } else {
-    cBody.orbitalAngle += deltaTime / cBody.orbitalPeriod * 2 * Math.PI;
+    cBody.orbitalAngle += deltaTime / cBody.orbitalPeriod * 2 * Math.PI * shouldProgressTime;
   }
 
   cBody.x = cBody.orbitalDistance * Math.cos(cBody.orbitalAngle);
@@ -177,44 +204,6 @@ function incrementPositions(cBody, deltaTime) {
     incrementPositions(child, deltaTime);
   });
 }
-
-function computeTrajectoryTime(x_1, y_1, x_2, y_2, R_1, R_2, angle_1, angle_2, angVelo_2, v, T) {
-  let transFunction = v * T - Math.sqrt(Math.pow(x_2 + R_2 * Math.cos(angle_2 + angVelo_2 * T) - x_1 - R_1 * Math.cos(angle_1), 2)
-    + Math.pow(y_2 + R_2 * Math.cos(angle_2 + angVelo_2 * T) - y_1 - R_1 * Math.cos(angle_1), 2));
-  return transFunction;
-}
-
-function bisectionSolve(x_1, y_1, x_2, y_2, R_1, R_2, angle_1, angle_2, angVelo_2, v, a, b, tolerance, maxIterations) {
-  let f_a = computeTrajectoryTime(x_1, y_1, x_2, y_2, R_1, R_2, angle_1, angle_2, angVelo_2, v, a);
-  let f_b = computeTrajectoryTime(x_1, y_1, x_2, y_2, R_1, R_2, angle_1, angle_2, angVelo_2, v, b);
-  console.log(f_a);
-  console.log(f_b);
-  console.log(a);
-  console.log(b);
-  if ((a > b) || (!((f_a < 0) && (f_b > 0)) != ((f_a > 0) && (f_b < 0)))) {
-    return -2;
-  }
-  let iteration = 1;
-  while (iteration <= maxIterations) {
-    let c = (a + b) / 2;
-    let f_c = computeTrajectoryTime(x_1, y_1, x_2, y_2, R_1, R_2, angle_1, angle_2, angVelo_2, v, c);
-    console.log(f_c);
-    console.log("c: " + c);
-    if (f_c == 0 || ((b - a) / 2) < tolerance) {
-      return c;
-    }
-    iteration++;
-    if (Math.sign(f_c) == Math.sign(f_a)) {
-      a = c;
-      f_a = f_c
-    } else {
-      b = c;
-      f_b = f_c
-    }
-  }
-  return -1;
-}
-
 /**
  * The name of the texture used as the background.
  * @type {string}
@@ -235,6 +224,7 @@ function preload() {
   root = loadData();
   panoramaImg = loadImage(textureDirectory + panoramaImgName);
   initDefaultValues(root);
+  //T = bisectionSolve(0,0,0,0,root.children[2].orbitalDistance,root.children[1].orbitalDistance,0,Math.PI/2,Math.PI * 2 / root.children[2].orbitalPeriod,100,-100,150,.00001,2000);
 }
 
 /**
@@ -291,6 +281,11 @@ function draw() {
 
   // Render all bodies
   drawCBodies(root);
+  /*push();
+  stroke('red');
+  line(root.children[2].x, root.children[2].y, 0, root.children[1].x, root.children[1].y, 0);
+  pop();
+  renderPath(0,0,0,0,root.children[2].orbitalDistance,root.children[1].orbitalDistance,0,Math.PI/2,Math.PI * 2 / root.children[2].orbitalPeriod,100,-100,150,.00001,2000, millis() * .001, T);*/
 }
 
 /**
@@ -337,5 +332,64 @@ function drawCBodies(cBody) {
   cBody.children.forEach((moon) => {
     drawCBodies(moon);
   });
+  pop();
+}
+
+function computeTrajectoryTime(x_1, y_1, x_2, y_2, R_1, R_2, angle_1, angle_2, angVelo_2, v, T) {
+  let transFunction = v * T - Math.sqrt(Math.pow(x_2 + R_2 * Math.cos(angle_2 + angVelo_2 * T) - x_1 - R_1 * Math.cos(angle_1), 2)
+    + Math.pow(y_2 + R_2 * Math.cos(angle_2 + angVelo_2 * T) - y_1 - R_1 * Math.cos(angle_1), 2));
+  return transFunction;
+}
+
+function bisectionSolve(x_1, y_1, x_2, y_2, R_1, R_2, angle_1, angle_2, angVelo_2, v, a, b, tolerance, maxIterations) {
+  let f_a = computeTrajectoryTime(x_1, y_1, x_2, y_2, R_1, R_2, angle_1, angle_2, angVelo_2, v, a);
+  let f_b = computeTrajectoryTime(x_1, y_1, x_2, y_2, R_1, R_2, angle_1, angle_2, angVelo_2, v, b);
+  console.log(f_a);
+  console.log(f_b);
+  console.log(a);
+  console.log(b);
+  if ((a > b) || (!((f_a < 0) && (f_b > 0)) != ((f_a > 0) && (f_b < 0)))) {
+    return -2;
+  }
+  let iteration = 1;
+  while (iteration <= maxIterations) {
+    let c = (a + b) / 2;
+    let f_c = computeTrajectoryTime(x_1, y_1, x_2, y_2, R_1, R_2, angle_1, angle_2, angVelo_2, v, c);
+    console.log(f_c);
+    console.log("c: " + c);
+    if (f_c == 0 || ((b - a) / 2) < tolerance) {
+      return c;
+    }
+    iteration++;
+    if (Math.sign(f_c) == Math.sign(f_a)) {
+      a = c;
+      f_a = f_c
+    } else {
+      b = c;
+      f_b = f_c
+    }
+  }
+  return -1;
+}
+
+function renderPath(x_1, y_1, x_2, y_2, R_1, R_2, angle_1, angle_2, angVelo_2, v, a, b, tolerance, maxIterations, t, T) {
+  push();
+  //T /= T;
+  //t /= t;
+  if(t < T) {
+    t;
+  } else {
+    t = T;
+  }
+  console.log("t: " + t);
+  console.log("T: " + T);
+  let x;
+  let y;
+  x = (x_1 + R_1 * Math.cos(angle_1)) + t / T * ((x_2 + R_2 * Math.cos(angle_2 + angVelo_2 * T)) - (x_1 + R_1 * Math.cos(angle_1)));
+  y = (y_1 + R_1 * Math.sin(angle_1)) + t / T * ((y_2 + R_2 * Math.sin(angle_2 + angVelo_2 * T)) - (y_1 + R_1 * Math.sin(angle_1)));
+  //console.log("x: " + x);
+  //console.log("y: " + y);
+  translate(x, y, 0);
+  sphere(5);
   pop();
 }
