@@ -22,6 +22,7 @@
 ## Resources
 
 - [p5.js documentation](https://p5js.org/reference/)
+- [Bisection Method](https://en.wikipedia.org/wiki/Bisection_method)
 
 ## Data
 
