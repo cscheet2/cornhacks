@@ -213,7 +213,6 @@ function incrementPositions(cBody, deltaTime) {
  * the p5 canvas.
  */
 function getWindowDimensions() {
-  // Numbers are taken from CSS paddings/widths/gaps
   return {
     width: document.body.clientWidth,
     height: document.body.clientHeight
