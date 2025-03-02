@@ -22,7 +22,8 @@
         "orbitalPeriod": 224,
         "rotationalPeriod": -243.025,
         "radius": 6.0518e3,
-        "imgName": "venus_atmosphere_map.jpg",
+        "imgName": "venus_map.jpg",
+        "layerImgName": "venus_atmosphere_map.jpg",
         "children": []
       },
       {
@@ -32,6 +33,7 @@
         "rotationalPeriod": 0.997,
         "radius": 6.371e3,
         "imgName": "earth_map.jpg",
+        "layerImgName": "earth_cloud_map.jpg",
         "children": [
           {
             "name": "The Moon",
@@ -112,6 +114,7 @@
         "rotationalPeriod": 0.444,
         "radius": 5.8232e4,
         "imgName": "saturn_map.jpg",
+        "ringImgName": "saturn_ring_map.png",
         "children": [
           {
             "name": "Mimas",

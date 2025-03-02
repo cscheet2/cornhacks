@@ -1,34 +1,38 @@
 const canvasContainerId = 'canvas-container';
 
 const FRAME_RATE = 60;
-const TIME_SCALER = 1000;
+const TIME_SCALER = 500;
+const STROKE_WIDTH = 0.6;
 
 var root = null;  // Initialized in setup
 
 function loadData() {
   var xhr = new XMLHttpRequest();
-  var reponseRoot;
+  var responseRoot;
 
   xhr.overrideMimeType('application/json');
   xhr.open('GET', './data/celestial-bodies.json', false);
 
   xhr.onload = function() {
     if (this.status == 200) {
-      reponseRoot = JSON.parse(this.responseText).root;
+      responseRoot = JSON.parse(this.responseText).root;
     } else {
-      reponseRoot = {}
+      responseRoot = {}
       console.error('failed to query data');
     }
   }
 
   xhr.send();
-
-  return reponseRoot;
+  return responseRoot;
 }
 
-function initDefaultValues(cBody, level = 0) {
+function initDefaultValues(cBody, level=0) {
   if (cBody.imgName) {
-    cBody.img = loadImage(`./images/${cBody.imgName}`);
+    cBody.img = loadImage(`./images/celestial-bodies/${cBody.imgName}`);
+  }
+
+  if (cBody.layerImgName) {
+    cBody.layerImg = loadImage(`./images/celestial-bodies/${cBody.layerImgName}`);
   }
 
   cBody.rotationalAngle = cBody.orbitalAngle = 0;
@@ -107,7 +111,7 @@ function setup() {
 
   angleMode(RADIANS);
 
-  strokeWeight(1);
+  strokeWeight(STROKE_WIDTH);
   stroke(255, 255, 255);
 }
 
@@ -149,26 +153,39 @@ function draw() {
 
 function drawOrbit(cBody) {
   push();
-  fill(100, 100, 100, 100);
-  torus(cBody.orbitalDistance, 1, deltaY = 120);
+  fill(255, 255, 255, 50);
+  torus(cBody.orbitalDistance, STROKE_WIDTH, deltaY = 120);
   pop();
 }
 
 function drawCBodies(cBody) {
   drawOrbit(cBody);
+
   push();
   translate(cBody.x, cBody.y, cBody.z);
+
   push();
   rotateZ(cBody.rotationalAngle);
+  rotateX(-90);  // Rotate image the right way up
+
   if (cBody.img) {
     texture(cBody.img);
   }
+
   sphere(cBody.radius);
+
+  if (cBody.layerImg) {
+    push();
+    texture(cBody.layerImg);
+    tint(255, 128);
+    sphere(cBody.radius * 1.05)
+    pop();
+  }
+
   pop();
 
   cBody.children.forEach((moon) => {
     drawCBodies(moon);
   });
-
   pop();
 }
