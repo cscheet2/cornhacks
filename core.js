@@ -1,4 +1,30 @@
 /**
+ * Represents a celestial object.
+ * @typedef {Object} CelestialBody
+ * @property {string} name The name of the body.
+ * @property {number} orbitalDistance The distance at with the body orbits its
+ * parent (kilometers).
+ * @property {number} orbitalPeriod The period over which the body completes an
+ * orbit around its parent (earth days).
+ * @property {number} orbitalAngle The current angle the body is at in its orbit
+ * about its parent (radians).
+ * @property {number} rotationalPeriod The period over which the body completes
+ * one rotation about its own axis (earth days).
+ * @property {number} rotationalAngle The current angle the body is at in its orbit
+ * about its own axis (radians).
+ * @property {number} radius The radius of the celestial body (kilometers).
+ * @property {string?} imgName The name of the body's texture, if any.  Includes
+ * the file extension.
+ * @property {p5.Image?} img The p5 Image object containing the body's texture,
+ * if any.
+ * @property {string?} layerImgName The name of the body's cloud-layer texture,
+ * if any.  Includes the file extension.
+ * @property {p5.Image?} layerImg The p5 Image object containing the body's
+ * cloud-layer texture, if any.
+ * @property {[CelestialBody]} children The body's children, e.g. moons.
+ */
+
+/**
  * The id of the element that should contain the p5.js canvas.
  * @type {string}
  */
@@ -28,7 +54,6 @@ const FRAME_RATE = 60;
  */
 const STROKE_WIDTH = 0.6;
 
-var root = null;  // Initialized in setup
 let T;
 
 /**
@@ -39,37 +64,36 @@ let T;
 const TIME_SCALER = 500;
 
 /**
- * Represents a celestial object.
- * @typedef {Object} CelestialBody
- * @property {string} name The name of the body.
- * @property {number} orbitalDistance The distance at with the body orbits its
- * parent (kilometers).
- * @property {number} orbitalPeriod The period over which the body completes an
- * orbit around its parent (earth days).
- * @property {number} orbitalAngle The current angle the body is at in its orbit
- * about its parent (radians).
- * @property {number} rotationalPeriod The period over which the body completes
- * one rotation about its own axis (earth days).
- * @property {number} rotationalAngle The current angle the body is at in its orbit
- * about its own axis (radians).
- * @property {number} radius The radius of the celestial body (kilometers).
- * @property {string?} imgName The name of the body's texture, if any.  Includes
- * the file extension.
- * @property {p5.Image?} img The p5 Image object containing the body's texture,
- * if any.
- * @property {string?} layerImgName The name of the body's cloud-layer texture,
- * if any.  Includes the file extension.
- * @property {p5.Image?} layerImg The p5 Image object containing the body's
- * cloud-layer texture, if any.
- * @property {[CelestialBody]} children The body's children, e.g. moons.
- */
-
-/**
  * The root celestial body of the solar system, i.e. the Sun.  Initialized in
  * the p5's preload method.
  * @type {CelestialBody}
  */
 var root = null;
+
+/**
+ * Is 1 if time should progess, 0 otherwise.
+ * @type {number}
+ */
+var shouldProgressTime = 1
+
+/**
+ * The checkbox that freezes time.
+ * @type {Element}
+ */
+const freezeTimeCheckbox = document.getElementById('freeze-time');
+freezeTimeCheckbox.addEventListener('change', freezeTime);
+freezeTime();  // Grab initial value of freezeTimeCheckbox
+
+/**
+ * Toggles the value of shouldProgessTime.
+ */
+function freezeTime() {
+  if (freezeTimeCheckbox.checked) {
+    shouldProgressTime = 0;
+  } else {
+    shouldProgressTime = 1;
+  }
+}
 
 /**
  * Loads the JSON file containing all celestial data.
@@ -163,13 +187,13 @@ function incrementPositions(cBody, deltaTime) {
   if (cBody.rotationalPeriod == 0) {
     cBody.rotationalAngle = 0;  // Avoid divide by zero error
   } else {
-    cBody.rotationalAngle += deltaTime / cBody.rotationalPeriod * 2 * Math.PI;
+    cBody.rotationalAngle += deltaTime / cBody.rotationalPeriod * 2 * Math.PI * shouldProgressTime;
   }
 
   if (cBody.orbitalPeriod == 0) {
     cBody.orbitalAngle = 0;  // Avoid divide by zero error
   } else {
-    cBody.orbitalAngle += deltaTime / cBody.orbitalPeriod * 2 * Math.PI;
+    cBody.orbitalAngle += deltaTime / cBody.orbitalPeriod * 2 * Math.PI * shouldProgressTime;
   }
 
   cBody.x = cBody.orbitalDistance * Math.cos(cBody.orbitalAngle);
@@ -180,78 +204,11 @@ function incrementPositions(cBody, deltaTime) {
     incrementPositions(child, deltaTime);
   });
 }
-
-function computeTrajectoryTime(x_1, y_1, x_2, y_2, R_1, R_2, angle_1, angle_2, angVelo_2, v, T) {
-  let transFunction = v * T - Math.sqrt(Math.pow(x_2 + R_2 * Math.cos(angle_2 + angVelo_2 * T) - x_1 - R_1 * Math.cos(angle_1), 2)
-    + Math.pow(y_2 + R_2 * Math.cos(angle_2 + angVelo_2 * T) - y_1 - R_1 * Math.cos(angle_1), 2));
-  return transFunction;
-}
-
-function bisectionSolve(x_1, y_1, x_2, y_2, R_1, R_2, angle_1, angle_2, angVelo_2, v, a, b, tolerance, maxIterations) {
-  let f_a = computeTrajectoryTime(x_1, y_1, x_2, y_2, R_1, R_2, angle_1, angle_2, angVelo_2, v, a);
-  let f_b = computeTrajectoryTime(x_1, y_1, x_2, y_2, R_1, R_2, angle_1, angle_2, angVelo_2, v, b);
-  console.log(f_a);
-  console.log(f_b);
-  console.log(a);
-  console.log(b);
-  if ((a > b) || (!((f_a < 0) && (f_b > 0)) != ((f_a > 0) && (f_b < 0)))) {
-    return -2;
-  }
-  let iteration = 1;
-  while (iteration <= maxIterations) {
-    let c = (a + b) / 2;
-    let f_c = computeTrajectoryTime(x_1, y_1, x_2, y_2, R_1, R_2, angle_1, angle_2, angVelo_2, v, c);
-    console.log(f_c);
-    console.log("c: " + c);
-    if (f_c == 0 || ((b - a) / 2) < tolerance) {
-      return c;
-    }
-    iteration++;
-    if (Math.sign(f_c) == Math.sign(f_a)) {
-      a = c;
-      f_a = f_c
-    } else {
-      b = c;
-      f_b = f_c
-    }
-  }
-  return -1;
-}
-
-function renderPath(x_1, y_1, x_2, y_2, R_1, R_2, angle_1, angle_2, angVelo_2, v, a, b, tolerance, maxIterations, t, T) {
-  
-
-  push();
-  //T /= T;
-  //t /= t;
-  if(t < T) {
-    t;
-  } else {
-    t = T;
-  }
-  console.log("t: " + t);
-  console.log("T: " + T);
-  let x;
-  let y;
-  x = (x_1 + R_1 * Math.cos(angle_1)) + t / T * ((x_2 + R_2 * Math.cos(angle_2 + angVelo_2 * T)) - (x_1 + R_1 * Math.cos(angle_1)));
-  y = (y_1 + R_1 * Math.sin(angle_1)) + t / T * ((y_2 + R_2 * Math.sin(angle_2 + angVelo_2 * T)) - (y_1 + R_1 * Math.sin(angle_1)));
-  //console.log("x: " + x);
-  //console.log("y: " + y);
-  translate(x, y, 0);
-  sphere(5);
-  pop();
-}
-
-/* * * * * * * * * * * * * * * *
- * p5.js built-in functions
- * * * * * * * * * * * * * * * */
-
 /**
  * The name of the texture used as the background.
  * @type {string}
  */
 const panoramaImgName = 'milky_way.jpg';
-
 
 /**
  * The texture used as the background.
@@ -378,3 +335,61 @@ function drawCBodies(cBody) {
   pop();
 }
 
+function computeTrajectoryTime(x_1, y_1, x_2, y_2, R_1, R_2, angle_1, angle_2, angVelo_2, v, T) {
+  let transFunction = v * T - Math.sqrt(Math.pow(x_2 + R_2 * Math.cos(angle_2 + angVelo_2 * T) - x_1 - R_1 * Math.cos(angle_1), 2)
+    + Math.pow(y_2 + R_2 * Math.cos(angle_2 + angVelo_2 * T) - y_1 - R_1 * Math.cos(angle_1), 2));
+  return transFunction;
+}
+
+function bisectionSolve(x_1, y_1, x_2, y_2, R_1, R_2, angle_1, angle_2, angVelo_2, v, a, b, tolerance, maxIterations) {
+  let f_a = computeTrajectoryTime(x_1, y_1, x_2, y_2, R_1, R_2, angle_1, angle_2, angVelo_2, v, a);
+  let f_b = computeTrajectoryTime(x_1, y_1, x_2, y_2, R_1, R_2, angle_1, angle_2, angVelo_2, v, b);
+  console.log(f_a);
+  console.log(f_b);
+  console.log(a);
+  console.log(b);
+  if ((a > b) || (!((f_a < 0) && (f_b > 0)) != ((f_a > 0) && (f_b < 0)))) {
+    return -2;
+  }
+  let iteration = 1;
+  while (iteration <= maxIterations) {
+    let c = (a + b) / 2;
+    let f_c = computeTrajectoryTime(x_1, y_1, x_2, y_2, R_1, R_2, angle_1, angle_2, angVelo_2, v, c);
+    console.log(f_c);
+    console.log("c: " + c);
+    if (f_c == 0 || ((b - a) / 2) < tolerance) {
+      return c;
+    }
+    iteration++;
+    if (Math.sign(f_c) == Math.sign(f_a)) {
+      a = c;
+      f_a = f_c
+    } else {
+      b = c;
+      f_b = f_c
+    }
+  }
+  return -1;
+}
+
+function renderPath(x_1, y_1, x_2, y_2, R_1, R_2, angle_1, angle_2, angVelo_2, v, a, b, tolerance, maxIterations, t, T) {
+  push();
+  //T /= T;
+  //t /= t;
+  if(t < T) {
+    t;
+  } else {
+    t = T;
+  }
+  console.log("t: " + t);
+  console.log("T: " + T);
+  let x;
+  let y;
+  x = (x_1 + R_1 * Math.cos(angle_1)) + t / T * ((x_2 + R_2 * Math.cos(angle_2 + angVelo_2 * T)) - (x_1 + R_1 * Math.cos(angle_1)));
+  y = (y_1 + R_1 * Math.sin(angle_1)) + t / T * ((y_2 + R_2 * Math.sin(angle_2 + angVelo_2 * T)) - (y_1 + R_1 * Math.sin(angle_1)));
+  //console.log("x: " + x);
+  //console.log("y: " + y);
+  translate(x, y, 0);
+  sphere(5);
+  pop();
+}
