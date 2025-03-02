@@ -1,5 +1,7 @@
 # Cornhacks 2025
 
+A 3d, fully navigable map of the solar system, hosted [here](https://scheet2.github.io/cornhacks).
+
 ## Members
 
 - Carston Wiebe: cwiebe3@huskers.unl.edu
@@ -21,20 +23,23 @@
 
 ## Resources
 
-- [p5.js documentation](https://p5js.org/reference/)
-- [Bisection Method](https://en.wikipedia.org/wiki/Bisection_method)
+- [p5.js Documentation](https://p5js.org/reference/)
+- [Bisection Method Wikipedia Page](https://en.wikipedia.org/wiki/Bisection_method)
+- [Desmos (our own sketch)](https://www.desmos.com/calculator/iisttukdgu)
 
 ## Data
 
 ### Planet Photos
 
 - The webpage icon came from [Free Icons Png](https://www.freeiconspng.com/img/44668)
-- Most of the planet photos used in this project's graph came from the [Solar System Scope](https://www.solarsystemscope.com/textures/) website
+- Most of the planet photos used in this project's graph came from the
+  [Solar System Scope](https://www.solarsystemscope.com/textures/) website
 - The Pluto texture came from [NASA's Archives](https://nasa3d.arc.nasa.gov/detail/plu0rss1)
 
 ### Celestial Bodies JSON
 
-Planet and moon data is stored inside of  `/data/celestial-bodies.json`. Inside of the file, each entry is represented by the following...
+Planet and moon data is stored inside of  `/data/celestial-bodies.json`. Inside
+of the file, each entry is represented by the following...
 
 | JSON Entry  | Meaning                          | Units      |
 |-------------|----------------------------------|------------|
@@ -46,7 +51,8 @@ Planet and moon data is stored inside of  `/data/celestial-bodies.json`. Inside 
 | description | body overview                    | N/A        |
 | moons       | bodies orbiting                  | N/A        |
 
-Most of this data was filled in by the DeepSeek AI, which referenced the following sources...
+Most of this data was filled in by the DeepSeek AI, which referenced the
+following sources...
 
 - [NASA Planetary Fact Sheets](https://nssdc.gsfc.nasa.gov/planetary/factsheet/)
 - [JPL HORIZONS System](https://ssd.jpl.nasa.gov/horizons/)
