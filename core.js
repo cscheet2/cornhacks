@@ -87,20 +87,6 @@ var timeMultiplier = 1
 const canvasContainerId = 'canvas-container';
 
 /**
- * The HTML form containing all settings.
- * @type {Element}
- */
-const settingsForm = document.getElementById('settings-form');
-settingsForm.addEventListener('change', (event) => updateTimeMultiplier(event));
-
-/**
- * The default radio selection within the settings form.
- * @type {Element}
- */
-const defaultRadio = document.getElementById('time-multiplier-normal');
-defaultRadio.checked = true;
-
-/**
  * Updates the time multipler.
  * @param {Event} event The event that triggered the change.
  */
@@ -232,6 +218,12 @@ function preload() {
  * canvas and settings.
  */
 function setup() {
+  const settingsForm = document.getElementById('settings-form');
+  settingsForm.addEventListener('change', (event) => updateTimeMultiplier(event));
+
+  const defaultRadio = document.getElementById('time-multiplier-normal');
+  defaultRadio.checked = true;
+
   let { width, height } = getWindowDimensions();
   let canvas = createCanvas(width, height, WEBGL);
   canvas.parent(canvasContainerId);
