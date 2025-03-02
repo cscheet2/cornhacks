@@ -2,7 +2,7 @@ const canvasContainerId = 'canvas-container';
 const canvasContainer = document.getElementById(canvasContainerId);
 
 const FRAME_RATE = 60;
-const TIME_SCALER = 500;
+const TIME_SCALER = 250;
 
 var root = {
   "name": "The Sun",
