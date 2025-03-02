@@ -2,41 +2,51 @@ const canvasContainerId = 'canvas-container';
 const canvasContainer = document.getElementById(canvasContainerId);
 
 const FRAME_RATE = 60;
-const TIME_SCALER = 2;
+const TIME_SCALER = 0.3;
 
-var data = {
-  "root": {
-    "name": "The Sun",
-    "orbitalDistance": 0,
-    "diameter": 5,
-    "rotationalPeriod": 27,
-    "children": [
-      {
-        "name": "Earth",
-        "orbitalDistance": 30,
-        "orbitalPeriod": 30000,
-        "diameter": 2,
-        "rotaionalPeriod": 27,
-        "children": [
-          {
-            "name": "The Moon",
-            "orbitalDistance": 10,
-            "orbitalPeriod": 10000,
-            "diameter": 1,
-            "rotaionalPeriod": 27,
-          }
-        ],
-      },
-      {
-        "name": "Mars",
-        "orbitalDistance": 50,
-        "orbitalPeriod": 60000,
-        "diameter": 3,
-        "rotaionalPeriod": 60,
-        "children": [],
-      },
-    ],
-  },
+var root = {
+  "name": "The Sun",
+  "orbitalDistance": 0,
+  "orbitalPeriod": 0,
+  "rotationalPeriod": 2700,
+  "diameter": 5,
+  "children": [
+    {
+      "name": "Earth",
+      "orbitalDistance": 30,
+      "orbitalPeriod": 30000,
+      "rotationalPeriod": 2700,
+      "diameter": 2,
+      "children": [
+        {
+          "name": "The Moon",
+          "orbitalDistance": 10,
+          "orbitalPeriod": 10000,
+          "rotationalPeriod": 2700,
+          "diameter": 1,
+        }
+      ],
+    },
+    {
+      "name": "Mars",
+      "orbitalDistance": 50,
+      "orbitalPeriod": 60000,
+      "rotationalPeriod": 2700,
+      "diameter": 3,
+    },
+  ],
+}
+
+function initData(planet) {
+  planet.rotationalAngle = planet.orbitalAngle = 0;
+
+  if (planet.children) {
+    planet.children.forEach((child) => {
+      initData(child);
+    })
+  } else {
+    planet.children = [];
+  }
 }
 
 function getWindowDimensions() {
@@ -46,36 +56,26 @@ function getWindowDimensions() {
   };
 }
 
-var time = Date.now();  // Used to find changeInTime
-var changeInTime = 0;
-
-function incrementPositions(planet) {
-  if (isNaN(planet.angle)) {
-    planet.angle = 0;
+function incrementPositions(planet, deltaTime) {
+  if (planet.rotationalPeriod == 0) {
+    planet.rotationalAngle = 0;  // Avoid divide by zero error
   } else {
-    planet.angle += changeInTime / planet.orbitalPeriod * 2 * Math.PI * TIME_SCALER;
+    planet.rotationalAngle += deltaTime / planet.rotationalPeriod * 2 * Math.PI * TIME_SCALER;
   }
 
-  if (planet.orbitalDistance == 0) {
-    planet.x = planet.y = planet.z = 0;
+  if (planet.orbitalPeriod == 0) {
+    planet.orbitalAngle = 0;  // Avoid divide by zero error
   } else {
-    planet.x = planet.orbitalDistance * Math.cos(planet.angle);
-    planet.y = planet.orbitalDistance * Math.sin(planet.angle);
-    planet.z = 0;  
+    planet.orbitalAngle += deltaTime / planet.orbitalPeriod * 2 * Math.PI * TIME_SCALER;
   }
 
-  if (planet.children) {
-    planet.children.forEach(child => {
-      incrementPositions(child);
-    });  
-  }
-}
+  planet.x = planet.orbitalDistance * Math.cos(planet.orbitalAngle);
+  planet.y = planet.orbitalDistance * Math.sin(planet.orbitalAngle);
+  planet.z = 0;
 
-function updatePositions() {
-  changeInTime = Date.now() - time;
-  time = Date.now();
-
-  incrementPositions(data.root);
+  planet.children.forEach((child) => {
+    incrementPositions(child, deltaTime);
+  });
 }
 
 /* * * * * * * * * * * * * * * *
@@ -86,6 +86,8 @@ function updatePositions() {
  * Called once on start-up
  */
 function setup() {
+  initData(root);
+
   let { width, height } = getWindowDimensions();
   let canvas = createCanvas(width, height, WEBGL);
   canvas.parent(canvasContainerId);
@@ -104,11 +106,16 @@ function windowResized() {
   resizeCanvas(width, height);
 }
 
+var previousTime = Date.now();  // Used to find changeInTime
+
 /**
  * Called orbitalPeriodically according to framerate
  */
 function draw() {
-  updatePositions();
+  let changeInTime = Date.now() - previousTime;
+  previousTime = Date.now();
+
+  incrementPositions(root, changeInTime);
 
   background(0, 0, 0);
   frameRate(FRAME_RATE);
@@ -131,7 +138,7 @@ function draw() {
   lights();
   noStroke();
 
-  drawPlanets(data.root);
+  drawPlanets(root);
 }
 
 function drawOrbit(cBody) {
@@ -144,15 +151,13 @@ function drawOrbit(cBody) {
 function drawPlanets(planet) {
   drawOrbit(planet);
   push();
-  //rotateZ(angle);
+  rotateZ(planet.rotationalAngle);
   translate(planet.x, planet.y, planet.z);
-  sphere(planet.diameter);
+  box(planet.diameter);
 
-  if (planet.children) {
-    planet.children.forEach((moon) => {
-      drawPlanets(moon);
-    });
-  }
+  planet.children.forEach((moon) => {
+    drawPlanets(moon);
+  });
 
   pop();
 }
