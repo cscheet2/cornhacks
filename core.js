@@ -12,6 +12,24 @@ var root = {
   "radius": 6.96e5,
   "children": [
     {
+      "name": "Mercury"
+      , "orbitalDistance": 5.79e7
+      , "orbitalPeriod": 88
+      , "rotationalPeriod": 1
+      , "radius": 2.4397e3
+      , "children": [
+      ],
+    },
+    {
+      "name": "Venus"
+      , "orbitalDistance": 1.082e8
+      , "orbitalPeriod": 224
+      , "rotationalPeriod": 1
+      , "radius": 6.0518e3
+      , "children": [
+      ],
+    },
+    {
       "name": "Earth",
       "orbitalDistance": 1.496e8,
       "orbitalPeriod": 365,
@@ -30,41 +48,107 @@ var root = {
     {
       "name": "Mars",
       "orbitalDistance": 2.279e8,
-      "orbitalPeriod": 180,
+      "orbitalPeriod": 686,
       "rotationalPeriod": 3,
       "radius": 3.3895e3,
+      "children": [
+        {
+          "name": "Deimos"
+        , "orbitalDistance": 23460
+        , "orbitalPeriod":  1.2624
+        , "rotationalPeriod": 1
+          , "radius":  6.2
+        }
+        , {
+          "name": "Phobos"
+          , "orbitalDistance": 9270
+          , "orbitalPeriod":  0.3189
+          , "rotationalPeriod": 1
+          , "radius":  11.25
+        }
+      ],
+    },
+    {
+      "name": "Jupiter"
+      , "orbitalDistance": 7.785e8
+      , "orbitalPeriod": 4332.82
+      , "rotationalPeriod": 1
+      , "radius": 6.9911e4
+      , "children": [
+        {
+          "name": "Callisto"
+        , "orbitalDistance":  1883000
+        , "orbitalPeriod":  16.689
+        , "rotationalPeriod": 1
+          , "radius":  2400
+        }
+      ],
+    },
+    {
+      "name": "Saturn"
+      , "orbitalDistance": 1.429e9
+      , "orbitalPeriod": 10755
+      , "rotationalPeriod": 1
+      , "radius": 5.8232e4
+      , "children": [
+      ],
+    },
+    {
+      "name": "Uranus"
+      , "orbitalDistance": 2.871e9
+      , "orbitalPeriod": 30687
+      , "rotationalPeriod": 1
+      , "radius": 2.5362e4
+      , "children": [
+      ],
+    },
+    {
+      "name": "Neptune"
+      , "orbitalDistance": 4.498e9
+      , "orbitalPeriod": 60190
+      , "rotationalPeriod": 1
+      , "radius": 2.4622e4
+      , "children": [
+      ],
+    },
+    {
+      "name": "Pluto"
+      , "orbitalDistance": 5.906e9
+      , "orbitalPeriod": 247.92065 * 365
+      , "rotationalPeriod": 1
+      , "radius": 1.1883e3
+      , "children": [
+      ],
     },
   ],
 }
 
-function scientificNotation(num, mantissa = 0) {
-  if (num == 0) {
-    return { num: 0, mantissa: 0 };
-  } else if (num < 1) {
-    return scientificNotation(num * 10, mantissa - 1);
-  } else if (num >= 10) {
-    return scientificNotation(num / 10, mantissa + 1);
-  } else {
-    return { num: num, mantissa: mantissa };
+function initData(cBody, level = 0) {
+  cBody.rotationalAngle = cBody.orbitalAngle = 0;
+
+  switch (level) {
+    case 0:  // Root / Star
+      cBody.radius /= 0.5e4;
+      break;
+    case 1:  // Planets
+      cBody.radius /= 3e2;
+      cBody.orbitalDistance /= 3e5;
+      break;
+    case 2:  // Moons
+      cBody.radius /= 1e2;
+      cBody.orbitalDistance /= 0.5e4;
+      break;
   }
-}
 
-function initData(planet, level=0) {
-  planet.rotationalAngle = planet.orbitalAngle = 0;
+  cBody.orbitalPeriod *= TIME_SCALER;
+  cBody.rotationalPeriod *= TIME_SCALER;
 
-  planet.radius = scaleDisplayDistance(planet.radius) / 5;
-  planet.orbitalDistance = scaleDisplayDistance(planet.orbitalDistance);
-  console.log(planet.name, planet.radius, planet.orbitalDistance)
-
-  planet.orbitalPeriod *= TIME_SCALER;
-  planet.rotationalPeriod *= TIME_SCALER;
-
-  if (planet.children) {
-    planet.children.forEach((child) => {
+  if (cBody.children) {
+    cBody.children.forEach((child) => {
       initData(child, level + 1);
     })
   } else {
-    planet.children = [];
+    cBody.children = [];
   }
 }
 
@@ -75,32 +159,26 @@ function getWindowDimensions() {
   };
 }
 
-function incrementPositions(planet, deltaTime) {
-  if (planet.rotationalPeriod == 0) {
-    planet.rotationalAngle = 0;  // Avoid divide by zero error
+function incrementPositions(cBody, deltaTime) {
+  if (cBody.rotationalPeriod == 0) {
+    cBody.rotationalAngle = 0;  // Avoid divide by zero error
   } else {
-    planet.rotationalAngle += deltaTime / planet.rotationalPeriod * 2 * Math.PI;
+    cBody.rotationalAngle += deltaTime / cBody.rotationalPeriod * 2 * Math.PI;
   }
 
-  if (planet.orbitalPeriod == 0) {
-    planet.orbitalAngle = 0;  // Avoid divide by zero error
+  if (cBody.orbitalPeriod == 0) {
+    cBody.orbitalAngle = 0;  // Avoid divide by zero error
   } else {
-    planet.orbitalAngle += deltaTime / planet.orbitalPeriod * 2 * Math.PI;
+    cBody.orbitalAngle += deltaTime / cBody.orbitalPeriod * 2 * Math.PI;
   }
 
-  planet.x = planet.orbitalDistance * Math.cos(planet.orbitalAngle);
-  planet.y = planet.orbitalDistance * Math.sin(planet.orbitalAngle);
-  planet.z = 0;
+  cBody.x = cBody.orbitalDistance * Math.cos(cBody.orbitalAngle);
+  cBody.y = cBody.orbitalDistance * Math.sin(cBody.orbitalAngle);
+  cBody.z = 0;
 
-  planet.children.forEach((child) => {
+  cBody.children.forEach((child) => {
     incrementPositions(child, deltaTime);
   });
-}
-
-function scaleDisplayDistance(distance) {
-  let { num, mantissa } = scientificNotation(distance);
-  console.log(num);
-  return (distance == 0) ? 0 : (Math.log(distance) / Math.log(1.1));
 }
 
 /* * * * * * * * * * * * * * * *
@@ -150,44 +228,34 @@ function draw() {
 
 
   pointLight(
-    255, 0, 0, // color
+    255, 255, 0, // color
     0, 0, 0 // position
   );
 
   lights();
   noStroke();
 
-  drawPlanets(root);
+  drawCBodies(root);
 }
 
 function drawOrbit(cBody) {
   push();
   fill(100, 100, 100, 100);
-  torus(cBody.orbitalDistance, 0.2, deltaY = 60);
+  torus(cBody.orbitalDistance, 1, deltaY = 120);
   pop();
 }
 
-function drawPlanets(planet) {
-  drawOrbit(planet);
+function drawCBodies(cBody) {
+  drawOrbit(cBody);
   push();
-  // console.log(
-  //   [
-  //     planet.name,
-  //     planet.x,
-  //     planet.y,
-  //     planet.z,
-  //     planet.orbitalDistance,
-  //     planet.radius,
-  //   ].map(((s) => (isNaN(s)) ? s : scaleDistance(s)))
-  // );
-  translate(planet.x, planet.y, planet.z);
+  translate(cBody.x, cBody.y, cBody.z);
   push();
-  rotateZ(planet.rotationalAngle);
-  box(planet.radius);
+  rotateZ(cBody.rotationalAngle);
+  box(cBody.radius);
   pop();
 
-  planet.children.forEach((moon) => {
-    drawPlanets(moon);
+  cBody.children.forEach((moon) => {
+    drawCBodies(moon);
   });
 
   pop();
