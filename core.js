@@ -133,8 +133,11 @@ function bisectionSolve(x_1, y_1, x_2, y_2, R_1, R_2, angle_1, angle_2, angVelo_
  * p5.js built-in functions
  * * * * * * * * * * * * * * * */
 
+var backgroundImg;
+
 function preload() {
   root = loadData();
+  backgroundImg = loadImage(`./images/celestial-bodies/milky_way.jpg`);
   initDefaultValues(root);
 }
 
@@ -171,7 +174,7 @@ function draw() {
 
   incrementPositions(root, changeInTime);
 
-  background(0, 0, 0);
+  panorama(backgroundImg);
   frameRate(FRAME_RATE);
   fill(200);
 
