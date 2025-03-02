@@ -43,16 +43,9 @@ body {
   height: 100vh;
 }
 
-details {
+details#settings {
   position: absolute;
   top:8px;
-  z-index: 9999;
-}
-
-details#information {
   left:8px;
-}
-
-details#settings {
-  right:8px;
+  z-index: 9999;
 }
