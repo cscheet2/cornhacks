@@ -8,14 +8,14 @@ var root = {
   "name": "The Sun",
   "orbitalDistance": 0,
   "orbitalPeriod": 0,
-  "rotationalPeriod": 27,  // Solar rotation varies by latitude (27 days equatorial)
+  "rotationalPeriod": 27, 
   "radius": 6.96e5,
   "children": [
     {
       "name": "Mercury",
       "orbitalDistance": 5.79e7,
       "orbitalPeriod": 88,
-      "rotationalPeriod": 58.646,  // Corrected (58.646 Earth days)
+      "rotationalPeriod": 58.646,  
       "radius": 2.4397e3,
       "children": []
     },
@@ -23,7 +23,7 @@ var root = {
       "name": "Venus",
       "orbitalDistance": 1.082e8,
       "orbitalPeriod": 224,
-      "rotationalPeriod": -243.025,  // Corrected (retrograde rotation)
+      "rotationalPeriod": -243.025, 
       "radius": 6.0518e3,
       "children": []
     },
@@ -31,14 +31,14 @@ var root = {
       "name": "Earth",
       "orbitalDistance": 1.496e8,
       "orbitalPeriod": 365.256,
-      "rotationalPeriod": 0.997,  // Corrected (sidereal day)
+      "rotationalPeriod": 0.997,  
       "radius": 6.371e3,
       "children": [
         {
           "name": "The Moon",
           "orbitalDistance": 3.844e5,
           "orbitalPeriod": 27.322,
-          "rotationalPeriod": 27.322,  // Tidally locked
+          "rotationalPeriod": 27.322,  
           "radius": 1.7374e3
         }
       ]
@@ -47,7 +47,7 @@ var root = {
       "name": "Mars",
       "orbitalDistance": 2.279e8,
       "orbitalPeriod": 686.971,
-      "rotationalPeriod": 1.026,  // Corrected (24h 37m)
+      "rotationalPeriod": 1.026, 
       "radius": 3.3895e3,
       "children": [
         {
@@ -66,27 +66,24 @@ var root = {
         }
       ]
     },
-    // Jupiter and moons (79 total, listing major ones)
     {
       "name": "Jupiter",
       "orbitalDistance": 7.785e8,
       "orbitalPeriod": 4332.82,
-      "rotationalPeriod": 0.414,  // Corrected (9h 56m)
+      "rotationalPeriod": 0.414,  
       "radius": 6.9911e4,
       "children": [
         {"name": "Io", "orbitalDistance": 4.217e5, "orbitalPeriod": 1.769, "rotationalPeriod": 1.769, "radius": 1.8216e3},
         {"name": "Europa", "orbitalDistance": 6.711e5, "orbitalPeriod": 3.551, "rotationalPeriod": 3.551, "radius": 1.5608e3},
         {"name": "Ganymede", "orbitalDistance": 1.0704e6, "orbitalPeriod": 7.155, "rotationalPeriod": 7.155, "radius": 2.6341e3},
         {"name": "Callisto", "orbitalDistance": 1.883e6, "orbitalPeriod": 16.689, "rotationalPeriod": 16.689, "radius": 2.4103e3},
-        // Additional moons (Amalthea, Himalia, etc.) can be added here
       ]
     },
-    // Saturn and moons (83 confirmed, listing major ones)
     {
       "name": "Saturn",
       "orbitalDistance": 1.429e9,
       "orbitalPeriod": 10759.22,
-      "rotationalPeriod": 0.444,  // Corrected (10h 34m)
+      "rotationalPeriod": 0.444,
       "radius": 5.8232e4,
       "children": [
         {"name": "Mimas", "orbitalDistance": 1.8554e5, "orbitalPeriod": 0.942, "rotationalPeriod": 0.942, "radius": 198.3},
@@ -98,12 +95,11 @@ var root = {
         {"name": "Iapetus", "orbitalDistance": 3.5608e6, "orbitalPeriod": 79.33, "rotationalPeriod": 79.33, "radius": 734.5}
       ]
     },
-    // Uranus and moons (27 confirmed)
     {
       "name": "Uranus",
       "orbitalDistance": 2.871e9,
       "orbitalPeriod": 30687.15,
-      "rotationalPeriod": -0.718,  // Corrected (retrograde, 17h 14m)
+      "rotationalPeriod": -0.718, 
       "radius": 2.5362e4,
       "children": [
         {"name": "Miranda", "orbitalDistance": 1.299e5, "orbitalPeriod": 1.413, "rotationalPeriod": 1.413, "radius": 235.8},
@@ -113,24 +109,22 @@ var root = {
         {"name": "Oberon", "orbitalDistance": 5.835e5, "orbitalPeriod": 13.46, "rotationalPeriod": 13.46, "radius": 761.4}
       ]
     },
-    // Neptune and moons (14 confirmed)
     {
       "name": "Neptune",
       "orbitalDistance": 4.498e9,
       "orbitalPeriod": 60190.03,
-      "rotationalPeriod": 0.671,  // Corrected (16h 6m)
+      "rotationalPeriod": 0.671, 
       "radius": 2.4622e4,
       "children": [
         {"name": "Triton", "orbitalDistance": 3.5476e5, "orbitalPeriod": 5.877, "rotationalPeriod": 5.877, "radius": 1.3534e3},
         {"name": "Proteus", "orbitalDistance": 1.176e5, "orbitalPeriod": 1.122, "rotationalPeriod": 1.122, "radius": 210}
       ]
     },
-    // Pluto and moons (5 confirmed)
     {
       "name": "Pluto",
       "orbitalDistance": 5.906e9,
-      "orbitalPeriod": 90553,  // 248 Earth years
-      "rotationalPeriod": -6.387,  // Corrected (retrograde)
+      "orbitalPeriod": 90553,  
+      "rotationalPeriod": -6.387,  
       "radius": 1.1883e3,
       "children": [
         {"name": "Charon", "orbitalDistance": 1.96e4, "orbitalPeriod": 6.387, "rotationalPeriod": 6.387, "radius": 606},
