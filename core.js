@@ -28,6 +28,9 @@ const FRAME_RATE = 60;
  */
 const STROKE_WIDTH = 0.6;
 
+var root = null;  // Initialized in setup
+let T;
+
 /**
  * The constant that all time periods are multiplied by.  A larger scaler means
  * a larger period and slower rotation.
@@ -215,11 +218,40 @@ function bisectionSolve(x_1, y_1, x_2, y_2, R_1, R_2, angle_1, angle_2, angVelo_
   return -1;
 }
 
+function renderPath(x_1, y_1, x_2, y_2, R_1, R_2, angle_1, angle_2, angVelo_2, v, a, b, tolerance, maxIterations, t, T) {
+  
+
+  push();
+  //T /= T;
+  //t /= t;
+  if(t < T) {
+    t;
+  } else {
+    t = T;
+  }
+  console.log("t: " + t);
+  console.log("T: " + T);
+  let x;
+  let y;
+  x = (x_1 + R_1 * Math.cos(angle_1)) + t / T * ((x_2 + R_2 * Math.cos(angle_2 + angVelo_2 * T)) - (x_1 + R_1 * Math.cos(angle_1)));
+  y = (y_1 + R_1 * Math.sin(angle_1)) + t / T * ((y_2 + R_2 * Math.sin(angle_2 + angVelo_2 * T)) - (y_1 + R_1 * Math.sin(angle_1)));
+  //console.log("x: " + x);
+  //console.log("y: " + y);
+  translate(x, y, 0);
+  sphere(5);
+  pop();
+}
+
+/* * * * * * * * * * * * * * * *
+ * p5.js built-in functions
+ * * * * * * * * * * * * * * * */
+
 /**
  * The name of the texture used as the background.
  * @type {string}
  */
 const panoramaImgName = 'milky_way.jpg';
+
 
 /**
  * The texture used as the background.
@@ -235,6 +267,7 @@ function preload() {
   root = loadData();
   panoramaImg = loadImage(textureDirectory + panoramaImgName);
   initDefaultValues(root);
+  //T = bisectionSolve(0,0,0,0,root.children[2].orbitalDistance,root.children[1].orbitalDistance,0,Math.PI/2,Math.PI * 2 / root.children[2].orbitalPeriod,100,-100,150,.00001,2000);
 }
 
 /**
@@ -291,6 +324,11 @@ function draw() {
 
   // Render all bodies
   drawCBodies(root);
+  /*push();
+  stroke('red');
+  line(root.children[2].x, root.children[2].y, 0, root.children[1].x, root.children[1].y, 0);
+  pop();
+  renderPath(0,0,0,0,root.children[2].orbitalDistance,root.children[1].orbitalDistance,0,Math.PI/2,Math.PI * 2 / root.children[2].orbitalPeriod,100,-100,150,.00001,2000, millis() * .001, T);*/
 }
 
 /**

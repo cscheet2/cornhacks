@@ -1,6 +1,6 @@
 # Cornhacks 2025
 
-A 3d, fully navigable map of the solar system, hosted [here](https://scheet2.github.io/cornhacks).
+A 3d, fully navigable map of the solar system, hosted [here](https://cscheet2.github.io/cornhacks).
 
 ## Members
 
