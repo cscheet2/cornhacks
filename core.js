@@ -145,8 +145,8 @@ function initDefaultValues(cBody, level = 0) {
 function getWindowDimensions() {
   // Numbers are taken from CSS paddings/widths/gaps
   return {
-    width: document.body.clientWidth - 256 - 32 - 8,
-    height: document.body.clientHeight - 32
+    width: document.body.clientWidth,
+    height: document.body.clientHeight
   };
 }
 
@@ -339,3 +339,4 @@ function drawCBodies(cBody) {
   });
   pop();
 }
+
