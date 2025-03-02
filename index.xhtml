@@ -26,26 +26,27 @@
     <section id="navigation">
       <details>
         <summary class="subheading">Travel Steps</summary>
-        <!-- <div class="subheading">Travel Steps</div> -->
-        <!--Change these to be created in js-->
-        <div class="travel-steps">
-          <input type="text" />
-        </div>
-        <div class="travel-steps">
-          <button>+</button>
-        </div>
-        <div class="travel-steps">
-          <button>Go!</button>
+        <div id="nav-entries">
+          <div id="current-steps"></div>
+          <div class="nav-entry"><button id="add-step">Add Step!</button></div>
         </div>
       </details>
     </section>
     <section id="planets">
-      <div class="subheading">Planet Information</div>
+      <details>
+        <summary class="subheading">Planet Information</summary>
+        <div>:3</div>
+      </details>
     </section>
     <section id="settings">
-      <div class="subheading">Graph Settings</div>
+      <details>
+        <summary class="subheading">Graph Settings</summary>
+        <div class="setting-container">
+          <p>Rotation Speed</p>
+          <input type="range" min="1" max="100" value="50" class="slider"/>
+        </div>
+      </details>
     </section>
   </div>
 </body>
-
 </html>

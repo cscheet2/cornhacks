@@ -8,120 +8,140 @@ var root = {
   "name": "The Sun",
   "orbitalDistance": 0,
   "orbitalPeriod": 0,
-  "rotationalPeriod": 27,
+  "rotationalPeriod": 27,  // Solar rotation varies by latitude (27 days equatorial)
   "radius": 6.96e5,
   "children": [
     {
-      "name": "Mercury"
-      , "orbitalDistance": 5.79e7
-      , "orbitalPeriod": 88
-      , "rotationalPeriod": 1
-      , "radius": 2.4397e3
-      , "children": [
-      ],
+      "name": "Mercury",
+      "orbitalDistance": 5.79e7,
+      "orbitalPeriod": 88,
+      "rotationalPeriod": 58.646,  // Corrected (58.646 Earth days)
+      "radius": 2.4397e3,
+      "children": []
     },
     {
-      "name": "Venus"
-      , "orbitalDistance": 1.082e8
-      , "orbitalPeriod": 224
-      , "rotationalPeriod": 1
-      , "radius": 6.0518e3
-      , "children": [
-      ],
+      "name": "Venus",
+      "orbitalDistance": 1.082e8,
+      "orbitalPeriod": 224,
+      "rotationalPeriod": -243.025,  // Corrected (retrograde rotation)
+      "radius": 6.0518e3,
+      "children": []
     },
     {
       "name": "Earth",
       "orbitalDistance": 1.496e8,
-      "orbitalPeriod": 365,
-      "rotationalPeriod": 1,
+      "orbitalPeriod": 365.256,
+      "rotationalPeriod": 0.997,  // Corrected (sidereal day)
       "radius": 6.371e3,
       "children": [
         {
           "name": "The Moon",
           "orbitalDistance": 3.844e5,
-          "orbitalPeriod": 27,
-          "rotationalPeriod": 27,
-          "radius": 1.7374e3,
+          "orbitalPeriod": 27.322,
+          "rotationalPeriod": 27.322,  // Tidally locked
+          "radius": 1.7374e3
         }
-      ],
+      ]
     },
     {
       "name": "Mars",
       "orbitalDistance": 2.279e8,
-      "orbitalPeriod": 686,
-      "rotationalPeriod": 3,
+      "orbitalPeriod": 686.971,
+      "rotationalPeriod": 1.026,  // Corrected (24h 37m)
       "radius": 3.3895e3,
       "children": [
         {
-          "name": "Deimos"
-        , "orbitalDistance": 23460
-        , "orbitalPeriod":  1.2624
-        , "rotationalPeriod": 1
-          , "radius":  6.2
-        }
-        , {
-          "name": "Phobos"
-          , "orbitalDistance": 9270
-          , "orbitalPeriod":  0.3189
-          , "rotationalPeriod": 1
-          , "radius":  11.25
-        }
-      ],
-    },
-    {
-      "name": "Jupiter"
-      , "orbitalDistance": 7.785e8
-      , "orbitalPeriod": 4332.82
-      , "rotationalPeriod": 1
-      , "radius": 6.9911e4
-      , "children": [
+          "name": "Phobos",
+          "orbitalDistance": 9.377e3,
+          "orbitalPeriod": 0.3189,
+          "rotationalPeriod": 0.3189,
+          "radius": 11.267
+        },
         {
-          "name": "Callisto"
-        , "orbitalDistance":  1883000
-        , "orbitalPeriod":  16.689
-        , "rotationalPeriod": 1
-          , "radius":  2400
+          "name": "Deimos",
+          "orbitalDistance": 2.3459e4,
+          "orbitalPeriod": 1.2624,
+          "rotationalPeriod": 1.2624,
+          "radius": 6.2
         }
-      ],
+      ]
     },
+    // Jupiter and moons (79 total, listing major ones)
     {
-      "name": "Saturn"
-      , "orbitalDistance": 1.429e9
-      , "orbitalPeriod": 10755
-      , "rotationalPeriod": 1
-      , "radius": 5.8232e4
-      , "children": [
-      ],
+      "name": "Jupiter",
+      "orbitalDistance": 7.785e8,
+      "orbitalPeriod": 4332.82,
+      "rotationalPeriod": 0.414,  // Corrected (9h 56m)
+      "radius": 6.9911e4,
+      "children": [
+        {"name": "Io", "orbitalDistance": 4.217e5, "orbitalPeriod": 1.769, "rotationalPeriod": 1.769, "radius": 1.8216e3},
+        {"name": "Europa", "orbitalDistance": 6.711e5, "orbitalPeriod": 3.551, "rotationalPeriod": 3.551, "radius": 1.5608e3},
+        {"name": "Ganymede", "orbitalDistance": 1.0704e6, "orbitalPeriod": 7.155, "rotationalPeriod": 7.155, "radius": 2.6341e3},
+        {"name": "Callisto", "orbitalDistance": 1.883e6, "orbitalPeriod": 16.689, "rotationalPeriod": 16.689, "radius": 2.4103e3},
+        // Additional moons (Amalthea, Himalia, etc.) can be added here
+      ]
     },
+    // Saturn and moons (83 confirmed, listing major ones)
     {
-      "name": "Uranus"
-      , "orbitalDistance": 2.871e9
-      , "orbitalPeriod": 30687
-      , "rotationalPeriod": 1
-      , "radius": 2.5362e4
-      , "children": [
-      ],
+      "name": "Saturn",
+      "orbitalDistance": 1.429e9,
+      "orbitalPeriod": 10759.22,
+      "rotationalPeriod": 0.444,  // Corrected (10h 34m)
+      "radius": 5.8232e4,
+      "children": [
+        {"name": "Mimas", "orbitalDistance": 1.8554e5, "orbitalPeriod": 0.942, "rotationalPeriod": 0.942, "radius": 198.3},
+        {"name": "Enceladus", "orbitalDistance": 2.3802e5, "orbitalPeriod": 1.370, "rotationalPeriod": 1.370, "radius": 252.1},
+        {"name": "Tethys", "orbitalDistance": 2.9466e5, "orbitalPeriod": 1.888, "rotationalPeriod": 1.888, "radius": 533},
+        {"name": "Dione", "orbitalDistance": 3.7742e5, "orbitalPeriod": 2.737, "rotationalPeriod": 2.737, "radius": 561.4},
+        {"name": "Rhea", "orbitalDistance": 5.2704e5, "orbitalPeriod": 4.518, "rotationalPeriod": 4.518, "radius": 763.8},
+        {"name": "Titan", "orbitalDistance": 1.2218e6, "orbitalPeriod": 15.945, "rotationalPeriod": 15.945, "radius": 2.5747e3},
+        {"name": "Iapetus", "orbitalDistance": 3.5608e6, "orbitalPeriod": 79.33, "rotationalPeriod": 79.33, "radius": 734.5}
+      ]
     },
+    // Uranus and moons (27 confirmed)
     {
-      "name": "Neptune"
-      , "orbitalDistance": 4.498e9
-      , "orbitalPeriod": 60190
-      , "rotationalPeriod": 1
-      , "radius": 2.4622e4
-      , "children": [
-      ],
+      "name": "Uranus",
+      "orbitalDistance": 2.871e9,
+      "orbitalPeriod": 30687.15,
+      "rotationalPeriod": -0.718,  // Corrected (retrograde, 17h 14m)
+      "radius": 2.5362e4,
+      "children": [
+        {"name": "Miranda", "orbitalDistance": 1.299e5, "orbitalPeriod": 1.413, "rotationalPeriod": 1.413, "radius": 235.8},
+        {"name": "Ariel", "orbitalDistance": 1.909e5, "orbitalPeriod": 2.520, "rotationalPeriod": 2.520, "radius": 578.9},
+        {"name": "Umbriel", "orbitalDistance": 2.66e5, "orbitalPeriod": 4.144, "rotationalPeriod": 4.144, "radius": 584.7},
+        {"name": "Titania", "orbitalDistance": 4.363e5, "orbitalPeriod": 8.706, "rotationalPeriod": 8.706, "radius": 788.9},
+        {"name": "Oberon", "orbitalDistance": 5.835e5, "orbitalPeriod": 13.46, "rotationalPeriod": 13.46, "radius": 761.4}
+      ]
     },
+    // Neptune and moons (14 confirmed)
     {
-      "name": "Pluto"
-      , "orbitalDistance": 5.906e9
-      , "orbitalPeriod": 247.92065 * 365
-      , "rotationalPeriod": 1
-      , "radius": 1.1883e3
-      , "children": [
-      ],
+      "name": "Neptune",
+      "orbitalDistance": 4.498e9,
+      "orbitalPeriod": 60190.03,
+      "rotationalPeriod": 0.671,  // Corrected (16h 6m)
+      "radius": 2.4622e4,
+      "children": [
+        {"name": "Triton", "orbitalDistance": 3.5476e5, "orbitalPeriod": 5.877, "rotationalPeriod": 5.877, "radius": 1.3534e3},
+        {"name": "Proteus", "orbitalDistance": 1.176e5, "orbitalPeriod": 1.122, "rotationalPeriod": 1.122, "radius": 210}
+      ]
     },
-  ],
-}
+    // Pluto and moons (5 confirmed)
+    {
+      "name": "Pluto",
+      "orbitalDistance": 5.906e9,
+      "orbitalPeriod": 90553,  // 248 Earth years
+      "rotationalPeriod": -6.387,  // Corrected (retrograde)
+      "radius": 1.1883e3,
+      "children": [
+        {"name": "Charon", "orbitalDistance": 1.96e4, "orbitalPeriod": 6.387, "rotationalPeriod": 6.387, "radius": 606},
+        {"name": "Styx", "orbitalDistance": 4.26e4, "orbitalPeriod": 20.16, "rotationalPeriod": 20.16, "radius": 16},
+        {"name": "Nix", "orbitalDistance": 4.86e4, "orbitalPeriod": 24.85, "rotationalPeriod": 24.85, "radius": 49.8},
+        {"name": "Kerberos", "orbitalDistance": 5.8e4, "orbitalPeriod": 32.17, "rotationalPeriod": 32.17, "radius": 19},
+        {"name": "Hydra", "orbitalDistance": 6.46e4, "orbitalPeriod": 38.20, "rotationalPeriod": 38.20, "radius": 40.7}
+      ]
+    }
+  ]
+};
 
 function initData(cBody, level = 0) {
   cBody.rotationalAngle = cBody.orbitalAngle = 0;

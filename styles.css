@@ -46,9 +46,10 @@ body {
   gap: 4px;
 
   grid-template:
-    "head head" min-content
+    "head main" min-content
     "navs main" 1fr
-    /256px 1fr;
+    / 256px 1fr;
+
 
   width: 100vw;
   max-width: 2048px;
@@ -58,6 +59,7 @@ body {
 nav {
   grid-area: head;
   text-align: center;
+  width: 100%;
 }
 
 h1 {
@@ -82,27 +84,79 @@ section .subheading {
   padding: 20px 0px;
 }
 
-section#navigation .travel-steps {
+section#navigation #nav-entries {
   display: flex;
-  gap: 10px;
-  font-size: 16px;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-
-section#navigation .travel-steps input,
-section#navigation .travel-steps button {
+  flex-direction: column;
   width: 80%;
-  padding: 8px;
-  border-radius: 20px;
-  box-sizing: border-box;
-  margin-left: auto;
-  margin-right: auto;
+  gap: 8px;
 }
 
-section#information {
-  grid-area: info;
+section#navigation .nav-entry {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  font-size: 16px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  padding: 8px;
+  width: 100%;
+  border: 1px solid black; 
+}
+section#navigation .nav-entry button {
+  width: 100%;
+  height: 100%;
+  padding: 0; 
+  border: none; 
+  background: transparent; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Optional: Add hover/focus effects */
+section#navigation .nav-entry button:hover {
+  background: rgba(0,0,0,0.1);
+}
+
+section#navigation #current-steps input {
+  background: transparent; 
+  border: none; 
+  outline: none; 
+  color: #000000;   
+}
+
+section#navigation #current-steps button {
+  background: transparent; 
+  border: 1px solid black; 
+  content
+  height: 32px;
+  width: 32px;
+  border-radius: 100%;
+  outline: none; 
+  color: #ffffff;
+  background-color: #f94449;  
+  justify-content: center;
+  align-items: center; 
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 100ms ease-in;
+}
+
+section#navigation #current-steps:hover button {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+
+section#navigation .setting-container {
+  font-size: 16px;
+}
+
+section#navigation .setting-container .slider {
+
 }
 
 main {
